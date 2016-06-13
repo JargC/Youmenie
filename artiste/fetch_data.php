@@ -17,12 +17,7 @@
 	 if($valeur == "Images")
 	 {
 		 ?>
-		 <h3>Fichiers de l'image :</h3>
-	<div class="form-group">
-     <label for="icone">Icône de l'image (JPG, JPEG, PNG ou GIF) :</label><br />
-     <input type="file" name="icone" id="icone" class="form-control" required="required" />
-	</div>
-	
+		 <h3>Fichiers de l'image :</h3>	
 	<div class="form-group">
      <label for="fichier">Fichier Image (JPG, JPEG, PNG ou GIF) :</label><br />
      <input type="file" name="fichier" id="fichier" class="form-control" required="required" />

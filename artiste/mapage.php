@@ -20,12 +20,12 @@ $titre = $_POST["titre"];
 $desc = $_POST["description"];
 
 
-$nom_icone = $_FILES['icone']['name']; 
+$nom_fichier = $_FILES['fichier']['name'];  
 $user = $_SESSION["login_artist"];
 
 
 	
-if ($_FILES['icone']['error'] > 0) {$erreur = "Erreur lors du transfert";}
+if ($_FILES['fichier']['error'] > 0) {$erreur = "Erreur lors du transfert";}
 /*
 if ($_FILES['icone']['size'] > $maxsize) $erreur = "Le fichier est trop gros"; 
 */
@@ -34,7 +34,7 @@ $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
 //1. strrchr renvoie l'extension avec le point (« . »).
 //2. substr(chaine,1) ignore le premier caractère de chaine.
 //3. strtolower met l'extension en minuscules.
-$extension_upload = strtolower(  substr(  strrchr($_FILES['icone']['name'], '.')  ,1)  );
+$extension_upload = strtolower(  substr(  strrchr($_FILES['fichier']['name'], '.')  ,1)  );
 if ( in_array($extension_upload,$extensions_valides) ) 
 {
 	echo "Extension correcte";
@@ -44,10 +44,11 @@ $image_sizes = getimagesize($_FILES['icone']['tmp_name']);
 if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight) $erreur = "Image trop grande"; */
 
 //Déplacement du fichier
-$nom = "{$type}/{$user}.{$nom_icone}";
-$resultat = move_uploaded_file($_FILES['icone']['tmp_name'],$nom);
+$nom = "{$type}/{$user}.{$nom_fichier}";
+$resultat = move_uploaded_file($_FILES['fichier']['tmp_name'],$nom);
 if ($resultat) $erreur = "Transfert réussi";
 else $erreur = "Transfert fail";
+
 
 //Ajout à la base de données
 $req_base="insert into oeuvres (type, titre, description, user, fichier, icone)
@@ -61,7 +62,7 @@ header("location:mapage.php#confirm_ajout");
 }else echo "Extension incorrecte";
 
 
-}else $erreur = "";
+}
 
 
 //Si c'est une VIDEO
@@ -91,8 +92,8 @@ $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
 //3. strtolower met l'extension en minuscules.
 $extension_upload = strtolower(  substr(  strrchr($_FILES['icone']['name'], '.')  ,1)  );
 
-//Vérification si le fichier est bien une vidéo valide.
-$extensions_valides_fichier = array( 'mp4' , 'wmv' , 'avi' );
+//Vérification si le fichier est bien une musique valide.
+$extensions_valides_fichier = array( 'mp4' , 'wmv' );
 //1. strrchr renvoie l'extension avec le point (« . »).
 //2. substr(chaine,1) ignore le premier caractère de chaine.
 //3. strtolower met l'extension en minuscules.
@@ -107,14 +108,14 @@ $image_sizes = getimagesize($_FILES['icone']['tmp_name']);
 if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight) $erreur = "Image trop grande"; */
 
 //Déplacement du fichier Icone
-$nom_icon = "{$type}/{$user}.icone.{$nom_icone}";
+$nom_icon = "{$type}/{$user}.{$nom_icone}";
 $resultat = move_uploaded_file($_FILES['icone']['tmp_name'],$nom_icon);
 if ($resultat) $erreur = "Transfert réussi de l'icone";
 else $erreur = "Transfert fail de l'icone";
-//Déplacement du fichier video.
-$nom_file = "{$type}/{$user}.fichier.{$nom_fichier}";
-$resultat = move_uploaded_file($_FILES['fichier']['tmp_name'],$nom_file);
-if ($resultat) $erreur = "Transfert réussi du fichier";
+//Déplacement du fichier musique.
+$nom_file = "{$type}/{$user}.{$nom_fichier}";
+$resultat2 = move_uploaded_file($_FILES['fichier']['tmp_name'],$nom_file);
+if ($resultat2) $erreur = "Transfert réussi du fichier";
 else $erreur = "Transfert fail du fichier";
 
 //Ajout à la base de données
@@ -130,7 +131,7 @@ header("location:mapage.php#confirm_ajout");
 }else echo "Extension incorrecte";
 
 
-}else $erreur = "";
+}
 
 
 //Si c'est une MUSIQUE
@@ -160,14 +161,14 @@ $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
 //3. strtolower met l'extension en minuscules.
 $extension_upload = strtolower(  substr(  strrchr($_FILES['icone']['name'], '.')  ,1)  );
 
-//Vérification si le fichier est bien une vidéo valide.
+//Vérification si le fichier est bien une musique valide.
 $extensions_valides_fichier = array( 'mp3' , 'FLAC' );
 //1. strrchr renvoie l'extension avec le point (« . »).
 //2. substr(chaine,1) ignore le premier caractère de chaine.
 //3. strtolower met l'extension en minuscules.
 $extension_upload_fichier = strtolower(  substr(  strrchr($_FILES['fichier']['name'], '.')  ,1)  );
 
-if ( in_array($extension_upload,$extensions_valides)  ) 
+if ( in_array($extension_upload,$extensions_valides) && in_array($extension_upload_fichier,$extensions_valides_fichier) ) 
 {
 	echo "Extension correcte";
 
@@ -180,10 +181,10 @@ $nom_icon = "{$type}/{$user}.{$nom_icone}";
 $resultat = move_uploaded_file($_FILES['icone']['tmp_name'],$nom_icon);
 if ($resultat) $erreur = "Transfert réussi de l'icone";
 else $erreur = "Transfert fail de l'icone";
-//Déplacement du fichier video.
+//Déplacement du fichier musique.
 $nom_file = "{$type}/{$user}.{$nom_fichier}";
-$resultat = move_uploaded_file($_FILES['fichier']['tmp_name'],$nom_file);
-if ($resultat) $erreur = "Transfert réussi du fichier";
+$resultat2 = move_uploaded_file($_FILES['fichier']['tmp_name'],$nom_file);
+if ($resultat2) $erreur = "Transfert réussi du fichier";
 else $erreur = "Transfert fail du fichier";
 
 //Ajout à la base de données
@@ -199,7 +200,7 @@ header("location:mapage.php#confirm_ajout");
 }else echo "Extension incorrecte";
 
 
-}else $erreur = "";
+}
 
 
 //Si c'est un TEXTE
@@ -269,7 +270,7 @@ header("location:mapage.php#confirm_ajout");
 }else echo "Extension incorrecte";
 
 
-}else $erreur = "";
+}
 
 }
 
@@ -347,7 +348,7 @@ function fetch_select(val)
                         <div class="headline text-center">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">Ma page</h2>
+                                    <h2 class="section-title">Ma page <?php if(isset($erreur)) echo $erreur; ?></h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->
@@ -475,7 +476,7 @@ function fetch_select(val)
                                     <div class="portfolio-item">
                                         <div class="item-image">
                                             <a href="#">
-                                                <img src="<?php echo $data["fichier"]?>" class="img-responsive center-block" alt="portfolio 1">
+                                                <img src="<?php echo $data["icone"]?>" class="img-responsive center-block" alt="portfolio 1">
                                                 <div><span><i class="fa fa-plus"></i></span></div>
                                             </a>
                                         </div>
