@@ -4,9 +4,12 @@ include "../con_sql.php";
 
 $_SESSION["ID"] = $_GET['ID'];
 //Permet de voir si l'utilisateur a like ou non cette oeuvre
+if(isset($_SESSION["login_artist"]))
+{
 $req_like='select * from user_like where oeuvre_id="'.$_GET['ID'].'" AND user="'.$_SESSION["login_artist"].'"';
 $resultat_like = mysql_query($req_like);
 $like = mysql_fetch_array($resultat_like);
+}
 
 
 
@@ -104,7 +107,7 @@ $(document).ready(function() {
         <div id="home-page">
 
            <!-- Ajout du HEADER -->
-		   <?php include "../header.php"; ?>
+		   <?php include "header.php"; ?>
 
 
             
@@ -165,20 +168,22 @@ $(document).ready(function() {
 						//Si l'oeuvre est une vidéo
 						if($info_artist['type']=="Videos")
 						{
-							echo "<<< Ajouter le player video ici >>>";
-							echo "<br>";
+							?>
+							<video controls src="<?php echo $info_artist['fichier']; ?>">Ici la description alternative</video>
+							<?php
 						}
 						?>
 						
 						<!-- Partie "Like" -->
 						<span class="like">
 						<div id='divlike'>
-						<?php if(!$like[0])
+						<?php if(isset($_SESSION["login_artist"]))
+{ if(!$like[0])
 						{
 	
 											echo "<button><i class='fa fa-heart-o'></i></button><br>";
 											
-						}else echo "<button><i class='fa fa-heart'></i></button><br>"; ?>
+}else echo "<button><i class='fa fa-heart'></i></button><br>"; }else echo "<i class='fa fa-heart-o'></i><br>";  ?>
 						
 							<?php echo $info_artist['likes'];
 								  echo " likes";?>
@@ -214,10 +219,11 @@ $(document).ready(function() {
 
                                         <div class="col-md-9 col-xs-9 address-info-desc">
                                             <h3>Artiste :</h3>
-                                            <p>
+                                            <p><a href="artiste.php?ID=<?php echo $info["id"];?>" >
                                                 <?php 
 															echo $info["login"]; 
 													 ?>
+													 </a>
                                             </p>
                                         </div> <!-- /.address-info-desc -->
 
@@ -287,7 +293,7 @@ $(document).ready(function() {
             </div>
             <!-- main-content end -->
 
-            <?php include "../footer.php"; ?>
+            <?php include "footer.php"; ?>
             
         </div> <!-- end of /#home-page -->
 		

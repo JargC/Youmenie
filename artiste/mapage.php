@@ -305,7 +305,7 @@ function fetch_select(val)
 
 </script>
 
-        <title>Agency - Home</title>
+        <title>Ma page</title>
 
         <!-- meta -->
         <meta charset="utf-8">
@@ -332,7 +332,7 @@ function fetch_select(val)
         <div id="home-page">
 
            <!-- Ajout du HEADER -->
-		   <?php include "../header.php"; ?>
+		   <?php include "header.php"; ?>
 
 
             
@@ -348,7 +348,7 @@ function fetch_select(val)
                         <div class="headline text-center">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">Ma page <?php if(isset($erreur)) echo $erreur; ?></h2>
+                                    <h2 class="section-title"><b>Ma page</b> <?php if(isset($erreur)) echo $erreur; ?></h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->
@@ -436,12 +436,12 @@ function fetch_select(val)
 					
 					<!--  begin portfolio section  -->
                 <section class="bg-light-gray">
-                    <div class="container">
+                    
 
                         <div class="headline text-center">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">Vos oeuvres</h2>
+                                    <h2 class="section-title"><u>Vos oeuvres</u></h2>
                                     <p class="section-sub-title">
                                         
                                     </p> <!-- /.section-sub-title -->
@@ -475,7 +475,7 @@ function fetch_select(val)
                                 <div class="col-md-4 col-sm-6">
                                     <div class="portfolio-item">
                                         <div class="item-image">
-                                            <a href="#">
+                                            <a href="oeuvre.php?ID=<?php echo $data["id"] ?>">
                                                 <img src="<?php echo $data["icone"]?>" class="img-responsive center-block" alt="portfolio 1">
                                                 <div><span><i class="fa fa-plus"></i></span></div>
                                             </a>
@@ -494,7 +494,7 @@ function fetch_select(val)
                                                 <div class="col-xs-6">
                                                     <span class="like">
                                                         <i class="fa fa-heart-o"></i>
-                                                        0
+                                                        <?php echo $data["likes"] ?>
                                                     </span>
                                                 </div>
                                             </div>
@@ -515,16 +515,16 @@ function fetch_select(val)
                         <div class="text-center">
 						
                             <a href="#ajouter_oeuvre" id="loadPortfolio" class="hidden-xs btn btn-white">
-                                Ajouter une oeuvre <span class="caret"></span>
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une oeuvre 
                             </a>
                         </div>
                             
-                    </div>
+                    
                 </section> 
                 <!--   end of portfolio section  -->
 
 				<br>
-				<a href="logout.php"><button type="submit" id="logout" name="logout" class="btn btn-black">Déconnexion</button></a>
+				<a href="logout.php"><button type="submit" id="logout" name="logout" class="btn btn-black"><i class="fa fa-power-off" aria-hidden="true"></i> Déconnexion</button></a>
 				<br><br>
                     
 
@@ -532,7 +532,7 @@ function fetch_select(val)
             </div>
             <!-- main-content end -->
 
-            <?php include "../footer.php"; ?>
+            <?php include "footer.php"; ?>
             
         </div> <!-- end of /#home-page -->
 		
