@@ -14,7 +14,7 @@
                         <!-- navbar logo -->
                         <div class="navbar-brand">
                             <span class="sr-only">Youmenie</span>
-                            <a href="../accueil.php">
+                            <a href="../index.php">
                                 <img src="assets/img/main_logo.jpg" class="img-responsive center-block" alt="logo" width="10%">
                             </a>
                         </div>
@@ -26,7 +26,7 @@
                     <div class="collapse navbar-collapse" id="main-nav-collapse">
                         <ul class="nav navbar-nav navbar-right text-uppercase">
                             <li>
-                                <a href="../accueil.php"><span><i class="fa fa-home" aria-hidden="true"></i> Accueil</span></a>
+                                <a href="../index.php"><span><i class="fa fa-home" aria-hidden="true"></i> Accueil</span></a>
                             </li>
 
                             <li class="dropdown">
@@ -35,10 +35,7 @@
                                     <?php if(!isset($_SESSION["login_artist"]))
     { ?>							
 									<li>
-                                        <a href="../index.php"><i class="fa fa-sign-in" aria-hidden="true"></i> Inscription</a>
-                                    </li>
-									<li>
-                                        <a href="../index.php"><i class="fa fa-power-off" aria-hidden="true"></i> Connexion</a>
+                                        <a href="../connexion.php"><i class="fa fa-sign-in" aria-hidden="true"></i> Inscription / Connexion</a>
                                     </li>
 	<?php }else { ?>
                                     <li>
@@ -53,12 +50,18 @@
                                     
                                 </ul>  <!-- end of /.dropdown-menu -->
                             </li> <!-- end of /.dropdown -->
+							
+							<li>
+                                <a href="../recherche.php"><span><i class="fa fa-search" aria-hidden="true"></i> Recherche</span></a>
+                            </li>
+
+                            <li>
+                                <a href="../annonces.php"><span><i class="fa fa-envelope" aria-hidden="true"></i> Annonces</span></a>
+                            </li>
 
                             
 
-                            <li>
-                                <a href="../contact.php"><span><i class="fa fa-envelope" aria-hidden="true"></i> Contact</span></a>
-                            </li>
+                            
                         </ul>
                     </div><!-- nav links -->
                     
