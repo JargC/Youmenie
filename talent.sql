@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 21 Juin 2016 à 13:22
+-- Généré le :  Mer 22 Juin 2016 à 18:33
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -23,6 +23,74 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `annonces`
+--
+
+CREATE TABLE IF NOT EXISTS `annonces` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date_publication` date NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `prix` float NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaires`
+--
+
+CREATE TABLE IF NOT EXISTS `commentaires` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) NOT NULL,
+  `Note` int(11) NOT NULL,
+  `date_publication` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `coordonnees`
+--
+
+CREATE TABLE IF NOT EXISTS `coordonnees` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `telephone` varchar(255) NOT NULL,
+  `rue` varchar(255) NOT NULL,
+  `ville` varchar(255) NOT NULL,
+  `code_postal` varchar(255) NOT NULL,
+  `departement` varchar(255) NOT NULL,
+  `region` varchar(255) NOT NULL,
+  `pays` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `likes`
+--
+
+CREATE TABLE IF NOT EXISTS `likes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(255) NOT NULL,
+  `oeuvre_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `likes`
+--
+
+INSERT INTO `likes` (`id`, `user`, `oeuvre_id`) VALUES
+(1, 'artist', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `oeuvres`
 --
 
@@ -34,18 +102,21 @@ CREATE TABLE IF NOT EXISTS `oeuvres` (
   `user` varchar(255) NOT NULL,
   `fichier` varchar(255) NOT NULL,
   `icone` varchar(255) NOT NULL,
+  `genre` varchar(255) NOT NULL,
   `likes` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `oeuvres`
 --
 
-INSERT INTO `oeuvres` (`id`, `type`, `titre`, `description`, `user`, `fichier`, `icone`, `likes`) VALUES
-(1, 'Musiques', 'Lil Wayne', 'Lolilol', 'artist', 'Musiques/artist.Lil Wayne - Love Me (Explicit) ft. Drake, Future.mp3', 'Musiques/artist.footer.jpg', 10),
-(2, 'Images', 'Le Titre', 'La Description', 'artist', 'Images/artist.code_1.png', 'Images/artist.code_1.png', 0),
-(3, 'Videos', 'DJ Drama - So Many Girls', 'Allo le monde', 'artist', 'Videos/artist.DJ Drama - So Many Girls (Feat. Wale_ Tyga & Roscoe Dash).mp4', 'Videos/artist.WoWScrnShot_061916_201234.jpg', 0);
+INSERT INTO `oeuvres` (`id`, `type`, `titre`, `description`, `user`, `fichier`, `icone`, `genre`, `likes`) VALUES
+(1, 'Musiques', 'Lil Wayne', 'Lolilol', 'artist', 'Musiques/artist.Lil Wayne - Love Me (Explicit) ft. Drake, Future.mp3', 'Musiques/artist.footer.jpg', '', 11),
+(2, 'Images', 'Le Titre', 'La Description', 'artist', 'Images/artist.code_1.png', 'Images/artist.code_1.png', '', 0),
+(3, 'Videos', 'DJ Drama - So Many Girls', 'Allo le monde', 'artist', 'Videos/artist.DJ Drama - So Many Girls (Feat. Wale_ Tyga & Roscoe Dash).mp4', 'Videos/artist.WoWScrnShot_061916_201234.jpg', '', 0),
+(4, 'Musiques', 'La musique', 'Donald', 'artist', 'Musiques/artist.Mac Miller - Donald Trump.mp3', 'Musiques/artist.edt.jpg', '', 0),
+(7, 'Textes', 'Test du texte', 'Sa description', 'artist', 'Hello tout le monde, Ã§a va ?', 'Textes/text.jpg', '', 0);
 
 -- --------------------------------------------------------
 
@@ -60,6 +131,8 @@ CREATE TABLE IF NOT EXISTS `user_artist` (
   `email` varchar(255) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
+  `age` int(11) NOT NULL,
+  `biographie` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -67,23 +140,10 @@ CREATE TABLE IF NOT EXISTS `user_artist` (
 -- Contenu de la table `user_artist`
 --
 
-INSERT INTO `user_artist` (`id`, `login`, `mdp`, `email`, `nom`, `prenom`) VALUES
-(1, 'artist', 'artist', 'test@test.fr', 'nom', 'prenom'),
-(2, 'test', 'test', 'test@tester.com', 'Grosso', 'Terry'),
-(3, 'test', 'test', 'test@tester.com', 'Grosso', 'Terry');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `user_like`
---
-
-CREATE TABLE IF NOT EXISTS `user_like` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` varchar(255) NOT NULL,
-  `oeuvre_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+INSERT INTO `user_artist` (`id`, `login`, `mdp`, `email`, `nom`, `prenom`, `age`, `biographie`) VALUES
+(1, 'artist', 'artist', 'test@test.fr', 'nom', 'prenom', 0, ''),
+(2, 'test', 'test', 'test@tester.com', 'Grosso', 'Terry', 0, ''),
+(3, 'test', 'test', 'test@tester.com', 'Grosso', 'Terry', 0, '');
 
 -- --------------------------------------------------------
 

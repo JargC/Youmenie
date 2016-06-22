@@ -5,7 +5,7 @@ include "../con_sql.php";
 
 
 //Permet de voir si l'utilisateur a like ou non cette oeuvre
-$req_like_sql='select * from user_like where oeuvre_id="'.$_SESSION["ID"].'" AND user="'.$_SESSION["login_artist"].'"';
+$req_like_sql='select * from likes where oeuvre_id="'.$_SESSION["ID"].'" AND user="'.$_SESSION["login_artist"].'"';
 $resultat_like_sql = mysql_query($req_like_sql);
 $like_sql = mysql_fetch_array($resultat_like_sql);
 
@@ -17,7 +17,7 @@ if(!$like_sql[0])
 {
 	//Si l'utilisateur n'a pas de like, on insère son like dans la BDD :
 	
-	$req_insert = "insert into user_like (user, oeuvre_id)
+	$req_insert = "insert into likes (user, oeuvre_id)
 			values('$user', '$id')";
 	$resultat_insert = mysql_query($req_insert);
 	
@@ -41,7 +41,7 @@ if(!$like_sql[0])
 }else 
 {
 	//Sinon on retire ce like
-	$req_delete = "DELETE FROM user_like WHERE user = '".$user."' AND oeuvre_id = '".$id."'";
+	$req_delete = "DELETE FROM likes WHERE user = '".$user."' AND oeuvre_id = '".$id."'";
 	$resultat_delete = mysql_query($req_delete);
 	//Puis on décrémente le compteur de like de l'oeuvre
 	$update_like_2 = "UPDATE oeuvres SET likes = likes - 1 WHERE id='".$id."'";

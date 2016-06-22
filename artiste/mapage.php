@@ -509,24 +509,15 @@ function fetch_select(val)
 	<div class="form-group">
 	<label for="icone">Type de l'oeuvre :</label><br />
      <select onchange="fetch_select(this.value);" name="type" class="form-control" required="required">
-		<option value="Musiques" selected="selected">Musique</option>
+		<option value="Vide" ></option>
+		<option value="Musiques" >Musique</option>
 		<option value="Videos">Vidéo</option>
 		<option value="Images">Image</option>
 		<option value="Textes">Texte</option>
 	 </select>
     </div>
 	
-	<div class="form-group">
-     <input  name="titre" type="text" class="form-control" id="titre" required="required" placeholder="Titre">
-	 <div id="result4"></div>
-    </div>
 	
-	<div class="form-group">
-     <input  name="description" type="text" class="form-control" id="description" required="required" placeholder="Description">
-	 <div id="result4"></div>
-    </div>
-	
-	<hr width="60%" color="silver" size="4" />
 	
 	<!-- <h3>Fichiers :</h3>
 	<div class="form-group">
@@ -543,9 +534,7 @@ function fetch_select(val)
 	<label for="error"><?php if(isset($erreur)) echo $erreur; ?></label>
 	
 	
-	<hr width="60%" color="silver" size="4" />
 	
-	<button type="submit" id="submit" name="ajout_oeuvre" class="btn btn-black">Ajouter</button></center>
 	
 	</form>
 	

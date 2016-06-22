@@ -6,7 +6,7 @@ $_SESSION["ID"] = $_GET['ID'];
 //Permet de voir si l'utilisateur a like ou non cette oeuvre
 if(isset($_SESSION["login_artist"]))
 {
-$req_like='select * from user_like where oeuvre_id="'.$_GET['ID'].'" AND user="'.$_SESSION["login_artist"].'"';
+$req_like='select * from likes where oeuvre_id="'.$_GET['ID'].'" AND user="'.$_SESSION["login_artist"].'"';
 $resultat_like = mysql_query($req_like);
 $like = mysql_fetch_array($resultat_like);
 }
