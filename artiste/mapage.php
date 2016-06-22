@@ -212,54 +212,13 @@ $desc = $_POST["description"];
 
 
 
-$nom_icone = $_FILES['icone']['name'];
-$nom_fichier = $_FILES['fichier']['name'];  
+$fichier =  $_POST["fichier"];
 $user = $_SESSION["login_artist"];
 
 
-	
-if ($_FILES['icone']['error'] > 0) {$erreur = "Erreur lors du transfert";}
-if ($_FILES['fichier']['error'] > 0) {$erreur = "Erreur lors du transfert";}
-/*
-if ($_FILES['icone']['size'] > $maxsize) $erreur = "Le fichier est trop gros"; 
-*/
-
-//Vérification si l'icone est bien une image valide.
-$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
-//1. strrchr renvoie l'extension avec le point (« . »).
-//2. substr(chaine,1) ignore le premier caractère de chaine.
-//3. strtolower met l'extension en minuscules.
-$extension_upload = strtolower(  substr(  strrchr($_FILES['icone']['name'], '.')  ,1)  );
-
-//Vérification si le fichier est bien une vidéo valide.
-$extensions_valides_fichier = array( 'mp3' );
-//1. strrchr renvoie l'extension avec le point (« . »).
-//2. substr(chaine,1) ignore le premier caractère de chaine.
-//3. strtolower met l'extension en minuscules.
-$extension_upload_fichier = strtolower(  substr(  strrchr($_FILES['fichier']['name'], '.')  ,1)  );
-
-if ( in_array($extension_upload,$extensions_valides) && in_array($extension_upload_fichier,$extensions_valides_fichier) ) 
-{
-	echo "Extension correcte";
-
-/*Vérification de la taille de l'mage
-$image_sizes = getimagesize($_FILES['icone']['tmp_name']);
-if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight) $erreur = "Image trop grande"; */
-
-//Déplacement du fichier Icone
-$nom_icon = "{$type}/{$user}.icone.{$nom_icone}";
-$resultat = move_uploaded_file($_FILES['icone']['tmp_name'],$nom_icon);
-if ($resultat) $erreur = "Transfert réussi de l'icone";
-else $erreur = "Transfert fail de l'icone";
-//Déplacement du fichier video.
-$nom_file = "{$type}/{$user}.fichier.{$nom_fichier}";
-$resultat = move_uploaded_file($_FILES['fichier']['tmp_name'],$nom_file);
-if ($resultat) $erreur = "Transfert réussi du fichier";
-else $erreur = "Transfert fail du fichier";
-
 //Ajout à la base de données
 $req_base="insert into oeuvres (type, titre, description, user, fichier, icone)
-                  values('$type','$titre','$desc','$user','$nom_file','$nom_icon')";
+                  values('$type','$titre','$desc','$user','$fichier','Textes/text.jpg')";
 mysql_query($req_base);
 
 
@@ -267,7 +226,7 @@ mysql_query($req_base);
 header("location:mapage.php#confirm_ajout");
 
 
-}else echo "Extension incorrecte";
+
 
 
 }

@@ -61,7 +61,9 @@
 	 {
 		 ?>
 		 <h3>Votre texte :</h3>
-	<textarea name="fichier" rows="5" cols="60"></textarea>
+	<div class="form-group">
+	<textarea name="fichier" rows="5" cols="60" class="form-control" required="required"></textarea>
+	</div>
 	
 
 	<?php

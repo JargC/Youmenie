@@ -138,10 +138,17 @@ $(document).ready(function() {
                         </div> <!-- /.headline -->
 						
 						<div class="text-center">
-                        
+                        <?php
+						//Si l'oeuvre est unn texte
+						if($info_artist['type']!="Textes")
+						{
+							?>
 						<a class="image-popup-vertical-fit" href="<?php echo $info_artist['icone']; ?>" title="<< <?php echo $info_artist['titre']; ?> >> de <b><?php echo $info["login"]; ?></b>">
                             <img src="<?php echo $info_artist['icone']; ?>" width="80%" />
-                        </a>   
+                        </a>
+						<?php
+						}else echo $info_artist['fichier'];
+						?>
 						
 						
 						<br><br>
