@@ -134,7 +134,7 @@ $(document).ready(function() {
 });
 </script>
 	
-
+    <link rel="icon" type="image/ico" href="../assets/img/site_LOGO.ico">
 
     </head>
 

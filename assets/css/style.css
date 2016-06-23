@@ -545,11 +545,11 @@ footer .input-group span.input-group-addon {
 }
 
 .footer-links li a {
-	color: #969595;
+	color:#ebd6c2;
 }
 
 .footer-links li:hover a {
-	color: #ffffff;
+	color: black;
 }
 
 .footer-links li a:before {
@@ -1926,6 +1926,10 @@ aside .tag-widget .tags a:hover {
   .popup{
     width: 70%;
   }
+}
+
+h3 {
+	margin-left: 50px;
 }
 
 /*
