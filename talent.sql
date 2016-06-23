@@ -3,7 +3,15 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
+<<<<<<< Updated upstream
 -- Généré le :  Jeu 23 Juin 2016 à 15:24
+=======
+<<<<<<< Updated upstream
+-- Généré le :  Mer 22 Juin 2016 à 18:33
+=======
+-- Généré le :  Mar 21 Juin 2016 à 13:22
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -23,6 +31,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+<<<<<<< Updated upstream
 -- Structure de la table `annonces`
 --
 
@@ -100,6 +109,8 @@ INSERT INTO `likes` (`id`, `user`, `oeuvre_id`) VALUES
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> Stashed changes
 -- Structure de la table `oeuvres`
 --
 
@@ -111,21 +122,34 @@ CREATE TABLE IF NOT EXISTS `oeuvres` (
   `user` varchar(255) NOT NULL,
   `fichier` varchar(255) NOT NULL,
   `icone` varchar(255) NOT NULL,
+<<<<<<< Updated upstream
   `genre` varchar(255) NOT NULL,
   `likes` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+=======
+  `likes` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+>>>>>>> Stashed changes
 
 --
 -- Contenu de la table `oeuvres`
 --
 
+<<<<<<< Updated upstream
 INSERT INTO `oeuvres` (`id`, `type`, `titre`, `description`, `user`, `fichier`, `icone`, `genre`, `likes`) VALUES
 (1, 'Musiques', 'Lil Wayne', 'Lolilol', 'artist', 'Musiques/artist.Lil Wayne - Love Me (Explicit) ft. Drake, Future.mp3', 'Musiques/artist.footer.jpg', '', 11),
 (2, 'Images', 'Le Titre', 'La Description', 'artist', 'Images/artist.code_1.png', 'Images/artist.code_1.png', '', 0),
 (3, 'Videos', 'DJ Drama - So Many Girls', 'Allo le monde', 'artist', 'Videos/artist.DJ Drama - So Many Girls (Feat. Wale_ Tyga & Roscoe Dash).mp4', 'Videos/artist.WoWScrnShot_061916_201234.jpg', '', 0),
 (4, 'Musiques', 'La musique', 'Donald', 'artist', 'Musiques/artist.Mac Miller - Donald Trump.mp3', 'Musiques/artist.edt.jpg', '', 0),
 (7, 'Textes', 'Test du texte', 'Sa description', 'artist', 'Hello tout le monde, Ã§a va ?', 'Textes/text.jpg', '', 0);
+=======
+INSERT INTO `oeuvres` (`id`, `type`, `titre`, `description`, `user`, `fichier`, `icone`, `likes`) VALUES
+(1, 'Musiques', 'Lil Wayne', 'Lolilol', 'artist', 'Musiques/artist.Lil Wayne - Love Me (Explicit) ft. Drake, Future.mp3', 'Musiques/artist.footer.jpg', 10),
+(2, 'Images', 'Le Titre', 'La Description', 'artist', 'Images/artist.code_1.png', 'Images/artist.code_1.png', 0),
+(3, 'Videos', 'DJ Drama - So Many Girls', 'Allo le monde', 'artist', 'Videos/artist.DJ Drama - So Many Girls (Feat. Wale_ Tyga & Roscoe Dash).mp4', 'Videos/artist.WoWScrnShot_061916_201234.jpg', 0);
+>>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -140,8 +164,11 @@ CREATE TABLE IF NOT EXISTS `user_artist` (
   `email` varchar(255) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
+<<<<<<< Updated upstream
   `age` int(11) NOT NULL,
   `biographie` text NOT NULL,
+=======
+>>>>>>> Stashed changes
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -149,10 +176,30 @@ CREATE TABLE IF NOT EXISTS `user_artist` (
 -- Contenu de la table `user_artist`
 --
 
+<<<<<<< Updated upstream
 INSERT INTO `user_artist` (`id`, `login`, `mdp`, `email`, `nom`, `prenom`, `age`, `biographie`) VALUES
 (1, 'artist', 'artist', 'test@test.fr', 'nom', 'prenom', 0, ''),
 (2, 'test', 'test', 'test@tester.com', 'Grosso', 'Terry', 0, ''),
 (3, 'test', 'test', 'test@tester.com', 'Grosso', 'Terry', 0, '');
+=======
+INSERT INTO `user_artist` (`id`, `login`, `mdp`, `email`, `nom`, `prenom`) VALUES
+(1, 'artist', 'artist', 'test@test.fr', 'nom', 'prenom'),
+(2, 'test', 'test', 'test@tester.com', 'Grosso', 'Terry'),
+(3, 'test', 'test', 'test@tester.com', 'Grosso', 'Terry');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_like`
+--
+
+CREATE TABLE IF NOT EXISTS `user_like` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(255) NOT NULL,
+  `oeuvre_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+>>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
