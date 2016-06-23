@@ -10,7 +10,7 @@
     <head>
 
         <title>annonce</title>
-        <link rel="icon" type="image/png" href="img/main_logo.jpg">
+        <link rel="icon" type="image/ico" href="assets/img/site_LOGO.ico">
         <!-- meta -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

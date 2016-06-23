@@ -51,7 +51,7 @@ function fetch_select(val)
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+        <link rel="icon" type="image/ico" href="../assets/img/site_LOGO.ico">
         
         <!-- stylesheets -->
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">

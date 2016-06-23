@@ -28,7 +28,7 @@
                         <div class="col-md-3 col-sm-6 col-xs-6 footer-widget">
                             <h4>Point d'Information</h4>
 
-                            <p>Laisse nous ton mail pour des actualités</p>
+                            <p style="color:white;">Laisse nous ton mail pour des actualités</p>
                             <div class="input-group margin-bottom-sm">
                                 <input class="form-control" type="text" placeholder="adresse mail">
                                 <span class="input-group-addon">

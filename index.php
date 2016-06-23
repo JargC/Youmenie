@@ -13,7 +13,7 @@ session_start();
     <head>
 
         <title>Youmenie - Concours de talents</title>
-        <link rel="icon" type="image/png" href="img/main_logo.jpg">
+        <link rel="icon" type="image/ico" href="assets/img/site_LOGO.ico">
         <!-- meta -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,10 +36,12 @@ session_start();
 
     <body>
 
+    <!-- Ajout du HEADER -->
+	<?php include "header.php"; ?>
+
         <div id="home-page">
 
-           <!-- Ajout du HEADER -->
-		   <?php include "header.php"; ?>
+           
 
 		   
 
@@ -76,11 +78,12 @@ session_start();
                     </div>
 
                     <br><br><br>
-				
-
-            <?php include "footer.php"; ?>
+            
+            </section>
             
         </div> <!-- end of /#home-page -->
+
+	<?php include "footer.php"; ?>
 
   </body>
 </html>

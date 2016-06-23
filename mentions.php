@@ -10,12 +10,12 @@
     <head>
 
         <title>annonce</title>
-        <link rel="icon" type="image/png" href="img/main_logo.jpg">
+        <link rel="icon" type="image/ico" href="assets/img/site_LOGO.ico">
         <!-- meta -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+        
         
         <!-- stylesheets -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="assets/css/owl.carousel.css">
         <link rel="stylesheet" href="assets/css/owl.theme.css">
         <link rel="stylesheet" href="assets/css/style.css">
-
+        <style type="text/css"> p { margin-left: 80px; } </style>
 
         <!-- scripts -->
         <script type="text/javascript" src="assets/js/modernizr.custom.97074.js"></script>
