@@ -93,8 +93,9 @@ include "con_sql.php";
 											<div class="col-md-4 col-sm-6">
 												<div class="portfolio-item">
 													<div class="item-image">
-														<a href="oeuvre.php?ID=<?php echo $data["id"] ?>">
-															<img src="<?php echo $data["icone"]?>" class="img-responsive center-block" alt="portfolio 1">
+														<a href="artiste/oeuvre.php?ID=<?php echo $data["id"] ?>">
+														<?php $art = "artiste/"; ?>
+															<img src="<?php echo $art;?><?php echo $data["icone"]?>" class="img-responsive center-block" alt="portfolio 1">
 															<div><span><i class="fa fa-plus"></i></span></div>
 														</a>
 													</div>
