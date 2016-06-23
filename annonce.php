@@ -38,162 +38,116 @@
            <!-- Ajout du HEADER -->
 		   <?php include "header.php"; ?>
 
-		   
+		   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Installation automatisée : 2nde étape</title>
+<style type="text/css">
+body {
+font-family:Tahoma, Arial, Serif;
+font-size:14px;
+}
+.note {
+font-size:1.1em;
+font-style:italic;
+}
+.ok {
+color:green;
+font-weight:bold;
+}
+.echec {
+color:red;
+font-weight:bold;
+}
+</style>
+</head>
+<body>
+<p>
+<?php
+if(isset($_POST['etape']) AND $_POST['etape'] == 1) { // si nous venons du formulaire alors
 
-	<?php
+// on crée des constantes dont on se servira plus tard
+define('RETOUR', '<br /><br /><input type="button" value="Retour" onclick="history.back()">');
+define('OK', '<span class="ok">OK</span><br />');
+define('ECHEC', '<span class="echec">ECHEC</span>');
 
-$webmaster = "youmenie.ecetech@gmail.com"; 
+$fichier = '../sql/config.php';
+if(file_exists($fichier) AND filesize($fichier ) > 0) { // si le fichier existe et qu'il n'est pas vide alors
+exit('Fichier de configuration déjà existant. Installation interrompue.'. RETOUR);
+}	
 
+// on crée nos variables, et au passage on retire les éventuels espaces	
+$hote = trim($_POST['hote']);
+$login = trim($_POST['login']);
+$mdp = trim($_POST['mdp']);
+$base = trim($_POST['base']);
 
+// on vérifie la connectivité avec le serveur avant d'aller plus loin
+if(!mysql_connect($hote, $login, $mdp)) {
+exit('Mauvais paramètres de connexion.'. RETOUR);
+}
 
-if(isset($_POST['envoyer'])){ // si une action est faite par l'utilisateur
-    
-    $alerte = $_POST['envoyer']; //chargement du button envoyer
-    $nom = htmlentities($_POST['nom'], ENT_NOQUOTES); // chargement du nom + mise en forme de la varible
-    $mail = htmlspecialchars($_POST['mail'], ENT_QUOTES); // chargement du mail  + mise en forme de la varible
-    $tel = htmlspecialchars($_POST['tel'], ENT_QUOTES); // chargement du tel + mise en forme de la varible
-    $sujet = htmlspecialchars($_POST['sujet'], ENT_QUOTES); // chargement du sujet + mise en forme de la varible
-    $message = htmlspecialchars($_POST['msg'], ENT_QUOTES); // chargement du message + mise en forme de la varible
+// on vérifie la connectivité avec la base avant d'aller plus loin	
+if(!mysql_select_db($base)) {
+exit('Mauvais nom de base.'. RETOUR);
+}	
+
+// le texte que l'on va mettre dans le config.php
+$texte = '<?php
+$hote   = "'. $hote .'";
+$login  = "'. $login .'";
+$mdp    = "'. $mdp .'";
+$base   = "'. $base .'";
+
+mysql_connect($hote,$login,$mdp);
+mysql_select_db($base);
+?>';
+
+// on vérifie s'il est possible d'ouvrir le fichier
+if(!$ouvrir = fopen($fichier, 'w')) {
+exit('Impossible d\'ouvrir le fichier : <strong>'. $fichier .'</strong>.'. RETOUR);
+}
+
+// s'il est possible d'écrire dans le fichier alors on ne se gêne pas
+if(fwrite($ouvrir, $texte) == FALSE) {
+exit('Impossible d\'écrire dans le fichier : <strong>'. $fichier .'</strong>.'. RETOUR);
+}
+
+// tout s'est bien passé
+echo 'Fichier de configuration : '. OK;
+fclose($ouvrir); // on ferme le fichier
 	
-}
 
-function verif_null($var){ // fonction qui verifie si le champs est vide
-    if($var!=""){
-     return $var;
-   }
-}
-
-function verif_mail($var) // fonction qui verifie si le mail est correct et si le champs est vide
-{
-   $code_syntaxe='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,5}$#'; // chargement de la syntaxe mail valide  
-      if(preg_match($code_syntaxe,$var)){ // compare la syntaxe mail valide au mail saisie
-        return $var;
-      }   
-}
-
-function verif_tel($var) // fonction qui verifie si le n° de tel est correct 
-{
-   $code_syntaxe='#^[0-9]{9,18}$#'; // chargement de la syntaxe tel valide  
-      if(preg_match($code_syntaxe,$var)){ // compare la syntaxe tel valide au tel saisie
-        return $var;
-      }
-}
-function envoi_mail($webmaster,$nom,$mail,$sujet,$tel,$message){ //fonction qui envoie le mail
-       $contenu_message = "Nom : ".$nom."\nMail : ".$mail."\nSujet : ".$sujet."\nTelephone : ".$tel."\nMessage : ".$message;
-	   $entete = "From: ".$nom." <".$mail."> \nContent-Type: text/html; charset=iso-8859-1";
-	 
-       mail($webmaster,$sujet,$contenu_message,$entete);
-	
-	   
+$requetes = ''; // on crée une variable vide car on va s'en servir après
+ 
+$sql = file('./base.sql'); // on charge le fichier SQL qui contient des requêtes
+foreach($sql as $lecture) { // on le lit
+	if(substr(trim($lecture), 0, 2) != '--') { // suppression des commentaires et des espaces
+	$requetes .= $lecture; // nous avons nos requêtes dans la variable
+	}
 }
  
-
-function verif_form($webmaster,$nom,$mail,$sujet,$tel,$message){ //fonction qui verifie si le formulaire est pret a etre envoyer
-        if(verif_null($nom) && verif_null($sujet) && verif_null($message) && verif_tel($tel)&& verif_mail($mail)){ // verifie si toute les fontions sont a true
-		   envoi_mail($webmaster,$nom,$mail,$sujet,$tel,$message);
-		   echo "<font color=\"red\"  size=\"3\" face=\"Verdana, Arial, Helvetica, sans-serif\" ><strong>Tout les champs sont valider le mail est envoyé. Merci</strong></font><br>"; // Le mail est envoyé
-		}else{
-		   echo "<font color=\"red\" size=\"3\" face=\"Verdana, Arial, Helvetica, sans-serif\" ><strong>Veuillez saisir correctement tous les champs en rouge.</strong></font><br>"; // Une erreur dans le formulaire
-		}
+$reqs = split(';', $requetes); // on sépare les requêtes
+foreach($reqs as $req){	// et on les exécute
+	if(!mysql_query($req) AND trim($req) != '') { // si la requête fonctionne bien et qu'elle n'est pas vide
+		exit('ERREUR : '. $req); // message d'erreur
+	}
 }
+echo 'Installation : '. OK;	
+echo '<br /><span class="note">Note : si le site est en ligne, veuillez supprimer le répertoire <strong>/install</strong> du ftp.</span>';
 
+} // si on passe sur ce fichier sans être passé par la première étape alors on redirige
+else
+exit('Vous devez d\'abord être passé par <a href="./index.php">le formulaire</a>.');	
 ?>
+</p>
+</body>
+</html>
 
-<br />
-<?php 
-if(isset($alerte)){ 
-   verif_form($webmaster,$nom,$mail,$sujet,$tel,$message); 
-}
-?>
-<br />
 
-<div style="text-align:center;">
 
-<form method="post">
-  <table width="44%" height="317" border="0">
-    <tr>
-      <td width="14%" align="left" valign="middle">
-	  <font size="3" face="Verdana, Arial, Helvetica, sans-serif"> Nom :</font>
-      </td>
-      <td width="86%">
-	 <input type="text" name="nom"  size="50" 
-	 <?php  if(isset($alerte)){  
-              if(verif_null($nom)){ 
-                 echo $style_input_blanc; 
-              }else { 
-                echo $style_input_rouge; 
-              }
-           } ?> 
-        value="<?php  if(isset($alerte)){ echo $nom; } ?>"> 
-      </td>
-    </tr>
-    <tr>
-      <td align="left" valign="middle">
-	  <font size="3" face="Verdana, Arial, Helvetica, sans-serif">Mail :</font></td>
-      <td>	    
-	 <input type="text" name="mail" size="50"  
-	 <?php  if(isset($alerte)){  //si verif_mail est false on background en rouge 
-              if(verif_mail($mail)){ 
-                 echo $style_input_blanc; 
-              }else { 
-                echo $style_input_rouge; 
-              }
-           } ?> 
-        value="<?php  if(isset($alerte)){ echo $mail; } ?>">  
-      </td>
-    </tr>
-    <tr>
-      <td valign="middle">
-      <font size="3" face="Verdana, Arial, Helvetica, sans-serif">Tel :</font></td>
-      <td>  
-	 <input type="text" name="tel" size="20"  
-	 <?php  if(isset($alerte)){  //si verif_tel est false on background en rouge 
-              if(verif_tel($tel)){ 
-                 echo $style_input_blanc; 
-              }else { 
-                echo $style_input_rouge; 
-              }
-           } ?> 
-        value="<?php  if(isset($alerte)){ echo $tel; } ?>"> 
-      </td>
-    </tr>
-      <td align="left" valign="middle">
-	 <font size="3" face="Verdana, Arial, Helvetica, sans-serif">Sujet :</font>
-      </td>
-      <td>
-	<input type="text" name="sujet" size="50" 
-        <?php  if(isset($alerte)){  
-              if(verif_null($sujet)){ 
-                 echo $style_input_blanc; 
-              }else { 
-                echo $style_input_rouge; 
-              }
-           } ?> 
-        value="<?php  if(isset($alerte)){ echo $sujet; } ?>"> 
-      </td>
-    </tr>
-    <tr>
-      <td height="181" valign="top">
-	 <font size="3" face="Verdana, Arial, Helvetica, sans-serif">Message : </font>
-      </td>
-      <td valign="top">  
-<textarea name="msg"  cols="47" rows="10" <?php  if(isset($alerte)){ if(verif_null($message)){ echo $style_textarea_blanc; }else { echo $style_textarea_rouge; }} ?> ><?php  if(isset($alerte)){ echo $message; } ?></textarea>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        &nbsp;  
-      </td>
-      <td>
-	<input type="submit"  name="envoyer" value="Envoyer">
-        &nbsp;&nbsp;
-        <input type="reset" value="Effacer" name="effacer" >
-      </td>
-    </tr>
-  </table>
-</form>
-</div>
-				
+		
 
             <?php include "footer.php"; ?>
             

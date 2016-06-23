@@ -1,9 +1,9 @@
 <footer>
 
-<div class="col-md-3 col-sm-6 col-xs-6 footer-widget">
+<div class="col-md-2 col-sm-6 col-xs-6 footer-widget">
                             <span class="sr-only">Youmenie</span>
                            
-                                <img src="assets/img/site_LOGO.png"  alt="logo" width="50%">
+                                <img src="assets/img/site_LOGO.png"  alt="logo" width="100%">
                        
                         </div>
                 <div class="container">
@@ -19,7 +19,6 @@
                                     
                                 </div>
 
-                             
                             </ul>
                         </div>
 
@@ -60,16 +59,22 @@
                                         <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
                                         <li><a href="https://www.youtube.com/?gl=FR&hl=fr"><i class="fa fa-youtube"></i></a></li>
                                         <li><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a></li>
+										
+                             
                                     </ul> 
                                 </div>
+								
+								
+								
                             </div>
 	
                         </div> <!-- /.footer-widget -->
-					<ul class="row footer-links">
-						<div class="col-md-3 col-sm-6 col-xs-6 footer-widget">
-                                  </a><a href="#" title="Retour en haut" <i class="fa fa-arrow-up" aria-hidden="true"></i></a>
-                            </div>
-                    </ul>
+						
+						<div class="col-md-1 col-sm-6 col-xs-6 footer-widget">
+							<ul class="footer-share-button">
+                                  <li><a href="#" title="Retour en haut" <i class="fa fa-arrow-up" aria-hidden="true"></i></a></li>
+							</ul>
+                        </div>
                     </div>
                 </div>
             </footer>
