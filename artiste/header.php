@@ -15,7 +15,7 @@
                         <div class="navbar-brand">
                             <span class="sr-only">Youmenie</span>
                             <a href="../index.php">
-                                <img src="assets/img/main_logo.jpg" class="img-responsive center-block" alt="logo" width="10%">
+                                <img src="assets/img/site_LOGO.png" class="img-responsive center-block" alt="logo" width="10%">
                             </a>
                         </div>
                         <!-- navbar logo -->

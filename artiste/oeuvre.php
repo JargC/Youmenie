@@ -2,6 +2,43 @@
 session_start();
 include "../con_sql.php";
 
+
+
+///COMMENTAIRES/AVIS	  
+if(isset($_REQUEST['post'])){
+$name = $_POST['name'];
+//Récupération des informations de l'artiste via l'ID de son oeuvre 
+$req_info='select * from user_artist where login="'.$name.'"';
+$resultat_info = mysql_query($req_info);
+$info = mysql_fetch_array($resultat_info);
+////////////////////////////////////////////
+
+$tuturl = $_POST['tuturl'];
+$id_oeuvre = $_POST['id_oeuvre'];
+$url = "artiste.php?ID=1";
+$description = $_POST['message'];
+$date = date("d/m/Y, H:i");
+
+
+
+
+//Check form
+if ($description == ''){
+	
+	echo'Please fill in all fields before submitting the comment.';
+	exit();
+}
+
+
+//Submit data
+$query = "INSERT INTO comments VALUES('','$name','$description','$url','$date', '$id_oeuvre')";
+mysql_query($query);
+
+} 
+
+
+///////////////////////////////////
+
 $_SESSION["ID"] = $_GET['ID'];
 //Permet de voir si l'utilisateur a like ou non cette oeuvre
 if(isset($_SESSION["login_artist"]))
@@ -40,7 +77,6 @@ $info = mysql_fetch_array($resultat_info);
 
 <html class="no-js"> <!--<![endif]-->
     <head>
-	
 
 
         <title><?php echo $info_artist['titre']; ?></title>
@@ -123,6 +159,7 @@ $(document).ready(function() {
                     
 					
 					<!--  begin portfolio section  -->
+							<br>
                 <section class="bg-light-gray">
                     <div class="container">
 
@@ -206,9 +243,17 @@ $(document).ready(function() {
 						
 
                         
-                        
-						
+                      
+				<?php
+				//Ajout des commentaires
+				include('avis.php');
+				?>	
+				
                  </section>
+				 
+				 
+
+					
 <!-- contact adresses section begin -->
                     <section class="contact-address bg-white">
                         <div class="row">

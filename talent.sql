@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 22 Juin 2016 à 18:33
+-- Généré le :  Jeu 23 Juin 2016 à 15:24
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -39,16 +39,25 @@ CREATE TABLE IF NOT EXISTS `annonces` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commentaires`
+-- Structure de la table `comments`
 --
 
-CREATE TABLE IF NOT EXISTS `commentaires` (
+CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) NOT NULL,
-  `Note` int(11) NOT NULL,
-  `date_publication` date NOT NULL,
+  `name` text NOT NULL,
+  `description` text NOT NULL,
+  `url` text NOT NULL,
+  `date` varchar(50) NOT NULL,
+  `id_oeuvre` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `comments`
+--
+
+INSERT INTO `comments` (`id`, `name`, `description`, `url`, `date`, `id_oeuvre`) VALUES
+(1, 'artist', 'Super belle vidÃ©o ! Au top :)', 'artiste.php?ID=1', '23/06/2016, 15:04', 3);
 
 -- --------------------------------------------------------
 
