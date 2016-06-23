@@ -65,7 +65,7 @@
 /*==================================  2. Global  ========================================*/
 
 body {
-	background-color: #white;
+	background-color: white;
 	font-family: 'Open Sans', sans-serif;;
 	font-weight: 400;
 	line-height: 1.45;
@@ -1926,7 +1926,7 @@ aside .tag-widget .tags a:hover {
   .popup{
     width: 70%;
   }
-
+}
 
 /*
 Theme Name: Avada Agency
