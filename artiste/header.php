@@ -56,7 +56,7 @@
                             </li>
 
                             <li>
-                                <a href="../annonces.php"><span><i class="fa fa-envelope" aria-hidden="true"></i> Annonces</span></a>
+                                <a href="../annonce.php"><span><i class="fa fa-envelope" aria-hidden="true"></i> Annonce</span></a>
                             </li>
 
                             

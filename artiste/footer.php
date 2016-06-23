@@ -1,165 +1,78 @@
 <footer>
+
+<div class="col-md-3 col-sm-6 col-xs-6 footer-widget">
+                            <span class="sr-only">Youmenie</span>
+                           
+                                <img src="assets/img/site_LOGO.png"  alt="logo" width="50%">
+                       
+                        </div>
                 <div class="container">
                     <div class="row">
 
                         <!-- useful links -->
                         <div class="col-md-3 col-sm-6 col-xs-6 footer-widget">
-                            <h4>Useful Links</h4>
+                            <h4>Les Liens Utiles</h4>
                             <ul class="row footer-links">
                                 <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <li><a href="#">Web Design</a></li>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Mobile</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Services</a></li>
+                                    <li><a href="recherche.php">Le Moteur de recherche</a></li>
+                                    <li><a href="mentions.php">Mentions légales</a></li>
+                                    
                                 </div>
 
-                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <li><a href="#">Organization</a></li>
-                                    <li><a href="#">Career</a></li>
-                                    <li><a href="#">Media</a></li>
-                                    <li><a href="#">24/7</a></li>
-                                    <li><a href="#">Right Way</a></li>
-                                </div>
+                             
                             </ul>
                         </div>
 
-                        <!-- recent news -->
-                        <div class="col-md-3 col-sm-6 col-xs-6 footer-widget">
-                            <h4>Recent News</h4>
-
-                            <div class="row footer-news">
-                                <div class="col-md-4 col-sm-4 col-xs-6">
-                                    <img src="assets/img/intro.jpg" class="img-responsive center-block" alt="recent news 1">
-                                </div>
-                                <div class="col-md-8 col-sm-4 col-xs-6">
-                                    <div class="row">
-                                        <p class="text-capitalize">
-                                            <a href="#">
-                                                a clear website gives more experience to the visitors
-                                            </a>
-                                        </p>
-                                        <p class="news-date">Dec 12,2015</p>
-                                    </div>
-                                </div>
-                            </div> <!-- /.footer-news -->
-
-                            <div class="row footer-news">
-                                <div class="col-md-4 col-sm-4 col-xs-6">
-                                    <img src="assets/img/intro.jpg" class="img-responsive center-block" alt="recent news 2">
-                                </div>
-                                <div class="col-md-8 col-sm-4 col-xs-6">
-                                    <div class="row">
-                                        <p class="text-capitalize">
-                                            <a href="#">
-                                                a clear website gives more experience to the visitors
-                                            </a>
-                                        </p>
-                                        <p class="news-date">Dec 12,2015</p>
-                                    </div>
-                                </div>
-                            </div> <!-- /.footer-news -->
-                        </div> <!-- /.footer-widget -->
-
+						
                         <!-- news-letter -->
                         <div class="col-md-3 col-sm-6 col-xs-6 footer-widget">
-                            <h4>E-News-Letter</h4>
+                            <h4>Point d'Information</h4>
 
-                            <p>Sign up for our mailing list to get latest updates and offers</p>
+                            <p>Laisse nous ton mail pour des actualités</p>
                             <div class="input-group margin-bottom-sm">
-                                <input class="form-control" type="text" placeholder="Email address">
+                                <input class="form-control" type="text" placeholder="adresse mail">
                                 <span class="input-group-addon">
                                     <i class="fa fa-paper-plane fa-fw"></i>
                                 </span>
                             </div>
-                            <p>We respect your privacy</p>
+                       
                         </div> <!-- /.footer-widget -->
 
                         <!-- about avada agency -->
                         <div class="col-md-3 col-sm-6 col-xs-6 footer-widget">
-                            <h4>Avada Agency</h4>
-
+                            <h4>YOUmenie </h4>
+                             Le web contest talent,100% francophone
                             <p>
-                                HUGE Website Builder is a big library of pre-designed web elements which help you to create website in few minutes.
+                               
                             </p>
 
                             <div class="footer-address">
                                 <p>
-                                    1-800-123-HELLO  <br>
-                                    example@mail.com
+                                   10 rue Sextius Michel 75015 <br>
+                                    youmenie.ecetech@gmail.com
                                 </p>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul class="footer-share-button">
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                    </ul> <!-- /.footer-share-button -->
+                                        <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>                                   
+                                        <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="https://www.youtube.com/?gl=FR&hl=fr"><i class="fa fa-youtube"></i></a></li>
+                                        <li><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a></li>
+                                    </ul> 
                                 </div>
                             </div>
+	
                         </div> <!-- /.footer-widget -->
-
+					<ul class="row footer-links">
+						<div class="col-md-3 col-sm-6 col-xs-6 footer-widget">
+                                  </a><a href="#" title="Retour en haut" <i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+                            </div>
+                    </ul>
                     </div>
                 </div>
             </footer>
 
 
-            <!-- footer-navigation start -->  
-            <nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
-                <div class="container">
-                    
-                    <div class="navbar-header">
-                        
-                        <!-- navbar logo -->
-                        <div class="navbar-brand">
-                            <span class="sr-only">&copy;THEMEWAGON</span>
-                            <a href="index.html">
-                                &copy;THEMEWAGON
-                            </a>
-                        </div>
-                        <!-- navbar logo -->
-
-                    </div><!-- /.navbar-header -->
-
-                    <!-- nav links -->
-                    <div class="collapse navbar-collapse" id="main-nav-collapse">
-                        <ul class="nav navbar-nav navbar-right text-capitalize">
-                            <li><a href="#about">
-                                <span>home</span>
-                            </a></li>
-
-                            <li><a href="#services">
-                                <span>pages</span>
-                            </a></li>
-
-                            <li><a href="#portfolio">
-                                <span>features</span>
-                            </a></li>
-
-                            <li><a href="#team">
-                                <span>portfolio</span>
-                            </a></li>
-
-                            <li><a href="#pricing">
-                                <span>blog</span>
-                            </a></li>
-
-                            <li><a href="#blog">
-                                <span>shop</span>
-                            </a></li>
-
-                            <li><a href="#contact">
-                                <span>contact</span>
-                            </a></li>
-                        </ul>
-                    </div><!-- nav links -->
-                    
-                </div><!-- /.container -->
-            </nav>
-            <!-- footer-navigation end -->
+            
