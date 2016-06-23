@@ -48,11 +48,11 @@ include "con_sql.php";
 					</td>
 				</tr>
 				<tr>
-					<td><input type="radio" name="type" value="Textes">Textes</td>
-					<td><input type="radio" name="type" value="Musiques">Musiques</td>
-					<td><input type="radio" name="type" value="Videos">Videos</td>
-					<td><input type="radio" name="type" value="Images">Images</td>
-					<td><input type="radio" name="type" value="All">Tout</td>
+					<td><input type="radio" name="type" value="Textes" required >Textes</td>
+					<td><input type="radio" name="type" value="Musiques" required >Musiques</td>
+					<td><input type="radio" name="type" value="Videos" required >Videos</td>
+					<td><input type="radio" name="type" value="Images" required >Images</td>
+					<td><input type="radio" name="type" value="All" required >Tout</td>
 				</tr>
 			</table>
 			</form>
@@ -65,7 +65,16 @@ include "con_sql.php";
 				else
 				{
 					$tag = $_POST['tag'];
-					$req = "SELECT * FROM oeuvres WHERE titre LIKE '%$tag%' OR description LIKE '%$tag%' ";
+					$type = $_POST['type'];
+					if($type !='All')
+					{
+						$req = "SELECT * FROM oeuvres WHERE (titre LIKE '%$tag%' OR description LIKE '%$tag%') AND type='$type' ";
+					}
+					else
+					{
+						$req = "SELECT * FROM oeuvres WHERE titre LIKE '%$tag%' OR description LIKE '%$tag%' ";
+					}
+					
 							$sql=mysql_query($req);
 							if(mysql_num_rows($sql)<1)
 							{
