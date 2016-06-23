@@ -38,112 +38,70 @@
            <!-- Ajout du HEADER -->
 		   <?php include "header.php"; ?>
 
-		   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Installation automatisée : 2nde étape</title>
-<style type="text/css">
-body {
-font-family:Tahoma, Arial, Serif;
-font-size:14px;
-}
-.note {
-font-size:1.1em;
-font-style:italic;
-}
-.ok {
-color:green;
-font-weight:bold;
-}
-.echec {
-color:red;
-font-weight:bold;
-}
-</style>
-</head>
-<body>
-<p>
-<?php
-if(isset($_POST['etape']) AND $_POST['etape'] == 1) { // si nous venons du formulaire alors
+		   <?php 
+	require_once("./fonctions.php"); // appel aux fonctions
 
-// on crée des constantes dont on se servira plus tard
-define('RETOUR', '<br /><br /><input type="button" value="Retour" onclick="history.back()">');
-define('OK', '<span class="ok">OK</span><br />');
-define('ECHEC', '<span class="echec">ECHEC</span>');
+	//variable qui serviront par la suite
+	$retour      = ""; //message de retour indiquant si tout c'est bien déroulé ou non
+	$type        = "";
+	$description = "";
+	$prix        = "";
+	$photo       = "";
 
-$fichier = '../sql/config.php';
-if(file_exists($fichier) AND filesize($fichier ) > 0) { // si le fichier existe et qu'il n'est pas vide alors
-exit('Fichier de configuration déjà existant. Installation interrompue.'. RETOUR);
-}	
-
-// on crée nos variables, et au passage on retire les éventuels espaces	
-$hote = trim($_POST['hote']);
-$login = trim($_POST['login']);
-$mdp = trim($_POST['mdp']);
-$base = trim($_POST['base']);
-
-// on vérifie la connectivité avec le serveur avant d'aller plus loin
-if(!mysql_connect($hote, $login, $mdp)) {
-exit('Mauvais paramètres de connexion.'. RETOUR);
-}
-
-// on vérifie la connectivité avec la base avant d'aller plus loin	
-if(!mysql_select_db($base)) {
-exit('Mauvais nom de base.'. RETOUR);
-}	
-
-// le texte que l'on va mettre dans le config.php
-$texte = '<?php
-$hote   = "'. $hote .'";
-$login  = "'. $login .'";
-$mdp    = "'. $mdp .'";
-$base   = "'. $base .'";
-
-mysql_connect($hote,$login,$mdp);
-mysql_select_db($base);
-?>';
-
-// on vérifie s'il est possible d'ouvrir le fichier
-if(!$ouvrir = fopen($fichier, 'w')) {
-exit('Impossible d\'ouvrir le fichier : <strong>'. $fichier .'</strong>.'. RETOUR);
-}
-
-// s'il est possible d'écrire dans le fichier alors on ne se gêne pas
-if(fwrite($ouvrir, $texte) == FALSE) {
-exit('Impossible d\'écrire dans le fichier : <strong>'. $fichier .'</strong>.'. RETOUR);
-}
-
-// tout s'est bien passé
-echo 'Fichier de configuration : '. OK;
-fclose($ouvrir); // on ferme le fichier
-	
-
-$requetes = ''; // on crée une variable vide car on va s'en servir après
- 
-$sql = file('./base.sql'); // on charge le fichier SQL qui contient des requêtes
-foreach($sql as $lecture) { // on le lit
-	if(substr(trim($lecture), 0, 2) != '--') { // suppression des commentaires et des espaces
-	$requetes .= $lecture; // nous avons nos requêtes dans la variable
+	// si le formulaire est envoyé
+	if(isset($_POST['sub']) AND $_POST['sub'] == "Envoyé"){ //vérification qu'il y a bien les donénes
+		$connexion = connexionBDD(); //instanciations de la connexion
+		//récupération des données nettoyées
+		$type = clean_chaine($_POST['type']);
+		$description = clean_chaine($_POST['description']);
+		$prix = $_POST['prix'];
+		$photo =  $_FILES['photo'];       	
+		//si l'insertion marche
+		if(insertannonce($type, $description, $prix, $photo, $connexion)){
+			//message indiquant que c'est bon (personnalisable en css en mettant une div/span/p autour)
+			$retour="c'est good";
+		}	
+		else{
+			//message d'erreur général 
+			$retour="annonce ou image non ajoutée, il se peut qu'il y ai une erreur dans les champs vérifier les données entrées.";
+		}
 	}
-}
- 
-$reqs = split(';', $requetes); // on sépare les requêtes
-foreach($reqs as $req){	// et on les exécute
-	if(!mysql_query($req) AND trim($req) != '') { // si la requête fonctionne bien et qu'elle n'est pas vide
-		exit('ERREUR : '. $req); // message d'erreur
-	}
-}
-echo 'Installation : '. OK;	
-echo '<br /><span class="note">Note : si le site est en ligne, veuillez supprimer le répertoire <strong>/install</strong> du ftp.</span>';
-
-} // si on passe sur ce fichier sans être passé par la première étape alors on redirige
-else
-exit('Vous devez d\'abord être passé par <a href="./index.php">le formulaire</a>.');	
 ?>
-</p>
-</body>
-</html>
+
+<!-- Html contenant le formulaire de contacte -->
+<form onsubmit ='return confirm("Enregistrer cette annonce telle quel ?")' enctype="multipart/form-data" method="POST">
+	<label for="type">Type : </label><input type="text" name="type" value="<?php echo $type ;?>" required/>
+	<label for="prix">Prix : </label><input type="text" name="prix" value="<?php echo $prix ;?>" required />
+	<label for="photo">Photo : </label><input type="file" name="photo" required/>
+	<label for="description">Description : </label><textarea name="description" required><?php echo $description;?></textarea>
+	<input type="submit" value="Envoyé" name="sub" />
+</form>
+
+<?php 
+	echo $retour; // affichage du message de retour 
+?>
+<?php 
+	require_once("./fonctions.php"); // on fait appel aux fonctions
+
+	$connexion = connexionBDD(); // instanciation de la connexion
+
+	$liste = ""; //on déclare une liste vide pour éviter des bugs si la requête ne renvoie rien
+	
+	$tab = selectAllannonce($connexion); // on va chercher la liste dans la base
+	
+	for($i = 0; $i<count($tab);$i++){ // pour chaque annonce
+		// création de la liste HTML depuis les données récupérées
+		$liste .= "<div class='annonce' style=' margin-top : 50px; '>"; 
+		$liste .= "<p>Date de publication :".$tab[$i]["date_publication"]."</p>";
+		$liste .= "<p>Type :".$tab[$i]["type"]."</p>";
+		$liste .= "<p>Prix :".$tab[$i]["prix"]."</p>";
+		$liste .= "<p><img src ='./img/".$tab[$i]["photo"]."' /></p>";
+		$liste .= "<p>Description :".$tab[$i]["description"]."</p>";		
+		$liste .= "</div>";
+	}
+
+	echo $liste; // affichage de la liste html crée précedement 
+?>
 
 
 
