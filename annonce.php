@@ -59,7 +59,7 @@
 		//si l'insertion marche
 		if(insertannonce($type, $description, $prix, $photo, $connexion)){
 			//message indiquant que c'est bon (personnalisable en css en mettant une div/span/p autour)
-			$retour="c'est good";
+			$retour="Annonce Validée";
 		}	
 		else{
 			//message d'erreur général 
@@ -69,13 +69,19 @@
 ?>
 
 <!-- Html contenant le formulaire de contacte -->
-<form onsubmit ='return confirm("Enregistrer cette annonce telle quel ?")' enctype="multipart/form-data" method="POST">
-	<label for="type">Type : </label><input type="text" name="type" value="<?php echo $type ;?>" required/>
-	<label for="prix">Prix : </label><input type="text" name="prix" value="<?php echo $prix ;?>" required />
-	<label for="photo">Photo : </label><input type="file" name="photo" required/>
-	<label for="description">Description : </label><textarea name="description" required><?php echo $description;?></textarea>
-	<input type="submit" value="Envoyé" name="sub" />
+<section class="bg-light-gray">
+  <div class="container">
+     
+<form onsubmit ='return confirm("Etes vous sur de vouloir poster cette annonces?")' enctype="multipart/form-data" method="POST">
+	<li><label for="type">Type : </label><input type="text" name="type" value="<?php echo $type ;?>" required/></li>
+	<li><label for="prix">Prix : </label><input type="text" name="prix" value="<?php echo $prix ;?>" required /></li>
+	<li><label for="photo">Photo : </label><input type="file" name="photo" required/></li>
+	<li><label for="description">Description : </label><textarea name="description" required><?php echo $description;?></textarea></li>
+	<li><input type="submit" value="Envoyé" name="sub" /></li>
 </form>
+    
+  </div>	
+</section>
 
 <?php 
 	echo $retour; // affichage du message de retour 
