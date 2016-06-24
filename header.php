@@ -29,28 +29,31 @@
                                 <a href="index.php"><span><i class="fa fa-home" aria-hidden="true"></i> Accueil</span></a>
                             </li>
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span><i class="fa fa-user" aria-hidden="true"></i> Mon compte</span></a>
-                                <ul class="dropdown-menu">
-								<?php if(!isset($_SESSION["login_artist"]))
-    { ?>							
-									<li>
+                                                            <?php if(!isset($_SESSION["login_artist"]))
+    { ?>        
+    <li class="dropdown">
+                                <a href="connexion.php" class="dropdown-toggle" data-toggle="dropdown"><span><i class="fa fa-user" aria-hidden="true"></i> Mon compte</span></a>
+                                <ul class="dropdown-menu">                  
+                                    <li>
                                         <a href="connexion.php"><i class="fa fa-sign-in" aria-hidden="true"></i> Inscription / Connexion</a>
                                     </li>
-									
-	<?php }else { ?>
+                                    </ul>  <!-- end of /.dropdown-menu -->
+                            </li> <!-- end of /.dropdown -->
+                                    
+    <?php }else { ?>
+        <li class="dropdown">
+                                <a href="artiste/mapage.php" class="dropdown-toggle" data-toggle="dropdown"><span><i class="fa fa-user" aria-hidden="true"></i> Mon compte</span></a>
+                                <ul class="dropdown-menu">  
                                     <li>
                                         <a href="artiste/mapage.php"><i class="fa fa-file-text" aria-hidden="true"></i> Ma page</a>
                                     </li>
                                     <li>
                                         <a href="artiste/logout.php"><i class="fa fa-power-off" aria-hidden="true"></i> Déconnexion</a>
                                     </li>
-	<?php } ?>
-                                    
-                                   
-                                    
-                                </ul>  <!-- end of /.dropdown-menu -->
+                                    </ul>  <!-- end of /.dropdown-menu -->
                             </li> <!-- end of /.dropdown -->
+    <?php } ?>
+                  
 
                             <li>
                                 <a href="recherche.php"><span><i class="fa fa-search" aria-hidden="true"></i> Recherche</span></a>

@@ -70,14 +70,30 @@
 
 <!-- Html contenant le formulaire de contacte -->
 <section class="bg-light-gray">
-  <div class="container">
-     
+  
+<section class="contact-form">     
 <form onsubmit ='return confirm("Etes vous sur de vouloir poster cette annonces?")' enctype="multipart/form-data" method="POST">
+<div class="row">
+    <div class="col-md-4">
+	</div>
+	<div class="col-md-4">
+	<div class="form-group">
 	<li><label for="type">Type : </label><input type="text" name="type" value="<?php echo $type ;?>" required/></li>
+	</div>
+	<div class="form-group">
 	<li><label for="prix">Prix : </label><input type="text" name="prix" value="<?php echo $prix ;?>" required /></li>
+	</div>
+	<div class="form-group">
 	<li><label for="photo">Photo : </label><input type="file" name="photo" required/></li>
+	</div>
+	<div class="form-group">
 	<li><label for="description">Description : </label><textarea name="description" required><?php echo $description;?></textarea></li>
-	<li><input type="submit" value="Envoyé" name="sub" /></li>
+	</div>
+	</div>
+	
+	<div class="col-md-3">
+	<li><input type="submit" value="Poster son annonce " name="sub"  /> </li>
+	</div>
 </form>
     
   </div>	
@@ -108,6 +124,7 @@
 
 	echo $liste; // affichage de la liste html crée précedement 
 ?>
+
 
 
 
