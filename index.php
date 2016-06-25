@@ -57,41 +57,33 @@ include "con_sql.php";
 
 		   
 
-		    <section class="bg-light-gray">
-                    <div class="container">
-
-                        <div class="headline text-center">
-                            <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <h3> Youmenie - Concours de jeunes talents </h3>							   
-						        </div>
-                            </div>
-                        </div> <!-- /.headline -->
-                       
-                       	<center>
-                    	<img src="img/The_Rogue_Moog.jpg" alt="Image d'un musicien" style="height:40em;">
-						</center>
-
-						<br><br><br>
-
-                        <div class="col-md-12">
-                            <div style="text-align:center;">
-                                <p> Bienvenue sur le site <b>Youmenie</b></p>
+			<section class="bg-light-gray skill">
+                    <center>
+					<div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>Youmenie : LE concours des jeunes talents francophone</h2>
+                                <p>
+                                <p> Bienvenue sur le site Youmenie</b></p>
 
 								<p> Notre objectif est de regrouper des communautés artistiques autour de différents thèmes afin de répérer de jeunes talents prometteurs </p>
 
-								<p> Que vous soyez musicien, vidéaste, écrivain ou bien travailleur de l'image.</p>
+								<p> Que vous soyez musicien, vidéaste, écrivain ou bien travailleur de l'image.Proposez vos oeuvres sur le site et laissez le public juger de votre potentiel ! </p>
+								<p>Ce concours réservé à la communauté Francophone vous permettra soit de découvrir des artistes soit justement de trouver votre public
+							    .Viens tenter ta chance et rejoins notre communauté créative</p>
+								
+                                </p>
+                            </div>
 
-								<p>Proposez vos oeuvres sur le site et laissez le public juger de votre potentiel ! </p>
-
-                            </div> <!-- /.price-box -->
+                            <div class="col-md-5">
+                                <div class="skill-level">
+                                    <img src="img/The_Rogue_Moog.jpg" alt="Image d'un musicien" style="height:30em;">
+                                </div> <!-- /.skill-level -->
+                            </div>
                         </div>
-            
                     </div>
-
-                    <br><br><br>
-            
-            </section>
+					</center>
+                </section>
             <!--  begin portfolio section  -->
                 <section class="bg-light-gray">
                     
