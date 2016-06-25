@@ -60,7 +60,7 @@ include "con_sql.php";
 			<?php
 				if(!isset($_POST['search']))
 				{
-					echo "<div style='padding:200px;background:yellow;'> </div>";
+					echo "<div style='padding:200px;background:#EBF0F8;'> </div>";
 				}
 				else
 				{

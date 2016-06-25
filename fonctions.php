@@ -63,13 +63,16 @@
 		while($row = $req_select->fetch(PDO::FETCH_ASSOC)){ // on fetch pour récup les données pour chaque ligne du résultat(utilisé quand on récupère des tableaux)
 			$tab[$i] = $row; //chaque ligne traité est ajouté dans un autre tableau
 			$i++;
-		}            
+		} 
+
+		if(isset($tab)){
 		if(count($tab)>=1){ //si il y a au moins une ligne dans les résultats
 			return $tab; //on retourne la liste
 		}
 		else{
 			return false; //sinon il n'y a rien
-		}   
+		} 
+		}		
 	}
 
 	//fonction permettant de récupérer l'image
