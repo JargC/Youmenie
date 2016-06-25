@@ -108,7 +108,7 @@ include "con_sql.php";
                         </div> <!-- /.headline -->
                         
                         <?php
-                        $req="SELECT * FROM oeuvres WHERE type ='Musiques' ORDER BY likes DESC LIMIT 3 ";
+                        $req="SELECT * FROM oeuvres WHERE type ='Musiques' AND likes > 0 ORDER BY likes DESC LIMIT 3 ";
                         $sql=mysql_query($req);
                         if(mysql_num_rows($sql)<1)
                         {
@@ -190,7 +190,7 @@ include "con_sql.php";
                         </div> <!-- /.headline -->
                         
                         <?php
-                        $req="SELECT * FROM oeuvres WHERE type ='Images' ORDER BY likes DESC LIMIT 3 ";
+                        $req="SELECT * FROM oeuvres WHERE type ='Images' AND likes > 0 ORDER BY likes DESC LIMIT 3 ";
                         $sql=mysql_query($req);
                         if(mysql_num_rows($sql)<1)
                         {
@@ -272,7 +272,7 @@ include "con_sql.php";
                         </div> <!-- /.headline -->
                         
                         <?php
-                        $req="SELECT * FROM oeuvres WHERE type ='Videos' ORDER BY likes DESC LIMIT 3 ";
+                        $req="SELECT * FROM oeuvres WHERE type ='Videos' AND likes > 0 ORDER BY likes DESC LIMIT 3 ";
                         $sql=mysql_query($req);
                         if(mysql_num_rows($sql)<1)
                         {
@@ -354,7 +354,7 @@ include "con_sql.php";
                         </div> <!-- /.headline -->
                         
                         <?php
-                        $req="SELECT * FROM oeuvres WHERE type ='Textes' ORDER BY likes DESC LIMIT 3 ";
+                        $req="SELECT * FROM oeuvres WHERE type ='Textes' AND likes > 0 ORDER BY likes DESC LIMIT 3 ";
                         $sql=mysql_query($req);
                         if(mysql_num_rows($sql)<1)
                         {
