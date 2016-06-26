@@ -99,7 +99,7 @@ include "con_sql.php";
                         <div class="headline text-center">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title"><u>Notre Podium musical <i class="fa fa-music" aria-hidden="true"></i></u></h2>
+                                    <h3 class="section-title"><u>Notre Podium musical <i class="fa fa-music" aria-hidden="true"></i></u></h3>
                                     <p class="section-sub-title">
                                         
                                     </p> <!-- /.section-sub-title -->
@@ -112,7 +112,7 @@ include "con_sql.php";
                         $sql=mysql_query($req);
                         if(mysql_num_rows($sql)<1)
                         {
-                            echo "<center><h2>Aucune musique n'a été postée</h2></center>";
+                            echo "<center><h3>Aucune musique n'a été postée</h3></center>";
                         }
                         else {
                             $data = mysql_fetch_assoc($sql);
@@ -130,7 +130,7 @@ include "con_sql.php";
 
                         
                             <!-- Affichage oeuvre -->
-                                <div class="col-md-4 col-sm-6">
+                                <div class="col-md-6 col-md-offset-3">
                                     <div class="portfolio-item">
                                         <div class="item-image">
                                             <a href="artiste/oeuvre.php?ID=<?php echo $data["id"] ?>">
@@ -181,7 +181,7 @@ include "con_sql.php";
                         <div class="headline text-center">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title"><u>Notre Podium imagerie <i class="fa fa-picture-o" aria-hidden="true"></i></u></h2>
+                                    <h3 class="section-title"><u>Notre Podium imagerie <i class="fa fa-picture-o" aria-hidden="true"></i></u></h3>
                                     <p class="section-sub-title">
                                         
                                     </p> <!-- /.section-sub-title -->
@@ -194,7 +194,7 @@ include "con_sql.php";
                         $sql=mysql_query($req);
                         if(mysql_num_rows($sql)<1)
                         {
-                            echo "<center><h2>Aucune image n'a été postée</h2></center>";
+                            echo "<center><h3>Aucune image n'a été postée</h3></center>";
                         }
                         else {
                             $data = mysql_fetch_assoc($sql);
@@ -263,7 +263,7 @@ include "con_sql.php";
                         <div class="headline text-center">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title"><u>Notre Podium vidéaste <i class="fa fa-video-camera" aria-hidden="true"></i></u></h2>
+                                    <h3 class="section-title"><u>Notre Podium vidéaste <i class="fa fa-video-camera" aria-hidden="true"></i></u></h3>
                                     <p class="section-sub-title">
                                         
                                     </p> <!-- /.section-sub-title -->
@@ -276,7 +276,7 @@ include "con_sql.php";
                         $sql=mysql_query($req);
                         if(mysql_num_rows($sql)<1)
                         {
-                            echo "<center><h2>Aucune vidéo n'a été postée</h2></center>";
+                            echo "<center><h3>Aucune vidéo n'a été postée</h3></center>";
                         }
                         else {
                             $data = mysql_fetch_assoc($sql);
@@ -294,7 +294,7 @@ include "con_sql.php";
 
                         
                             <!-- Affichage oeuvre -->
-                                <div class="col-md-4 col-sm-6">
+                                <div class="col-md-6 col-md-offset-3">
                                     <div class="portfolio-item">
                                         <div class="item-image">
                                             <a href="artiste/oeuvre.php?ID=<?php echo $data["id"] ?>">
@@ -345,7 +345,7 @@ include "con_sql.php";
                         <div class="headline text-center">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title"><u>Notre Podium textuel <i class="fa fa-font" aria-hidden="true"></i></u></h2>
+                                    <h3 class="section-title"><u>Notre Podium textuel <i class="fa fa-font" aria-hidden="true"></i></u></h3>
                                     <p class="section-sub-title">
                                         
                                     </p> <!-- /.section-sub-title -->
@@ -358,7 +358,7 @@ include "con_sql.php";
                         $sql=mysql_query($req);
                         if(mysql_num_rows($sql)<1)
                         {
-                            echo "<center><h2>Aucun texte n'a été posté</h2></center>";
+                            echo "<center><h3>Aucun texte n'a été posté</h3></center>";
                         }
                         else {
                             $data = mysql_fetch_assoc($sql);
@@ -376,7 +376,7 @@ include "con_sql.php";
 
                         
                             <!-- Affichage oeuvre -->
-                                <div class="col-md-4 col-sm-6">
+                                <div class="col-md-6 col-md-offset-3">
                                     <div class="portfolio-item">
                                         <div class="item-image">
                                             <a href="artiste/oeuvre.php?ID=<?php echo $data["id"] ?>">

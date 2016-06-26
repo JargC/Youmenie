@@ -72,12 +72,12 @@
 <section class="bg-light-gray">
   <div class="container">
      
-<form onsubmit ='return confirm("Etes vous sur de vouloir poster cette annonces?")' enctype="multipart/form-data" method="POST">
-	<li><label for="type">Type : </label><input type="text" name="type" value="<?php echo $type ;?>" required/></li>
-	<li><label for="prix">Prix : </label><input type="text" name="prix" value="<?php echo $prix ;?>" required /></li>
-	<li><label for="photo">Photo : </label><input type="file" name="photo" required/></li>
-	<li><label for="description">Description : </label><textarea name="description" required><?php echo $description;?></textarea></li>
-	<li><input type="submit" value="Envoyé" name="sub" /></li>
+<form onsubmit ='return confirm("Etes vous sur de vouloir poster cette annonce ?")' enctype="multipart/form-data" method="POST">
+	<li><label for="type">Type : </label><input class="form-control type="text" name="type" value="<?php echo $type ;?>" required/></li><br>
+	<li><label for="prix">Prix : </label><input class="form-control type="text" name="prix" value="<?php echo $prix ;?>" required /></li><br>
+	<li><label for="photo">Photo : </label><input class="form-control-file" type="file" name="photo" required/></li><br>
+	<li><label for="description">Description : </label><textarea class="form-control" name="description" required><?php echo $description;?></textarea></li><br>
+	<li><input  class="btn btn-primary" type="submit" value="Envoyer" name="sub" /></li>
 </form>
     
   </div>	

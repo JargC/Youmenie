@@ -14,7 +14,7 @@ include "con_sql.php";
     <head>
 
         <title>Youmenie - Concours de talents</title>
-        <link rel="icon" type="image/png" href="img/main_logo.jpg">
+        <link rel="icon" type="image/ico" href="assets/img/site_LOGO.ico">
         <!-- meta -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,24 +39,41 @@ include "con_sql.php";
 		<!-- Ajout du HEADER -->
 		<?php include "header.php"; ?>
 		
-		<section id="search-page">
-			<form method="post" action="" > 
-			<table>
-				<tr>
-					<td> Titre ou Description </td>
-					<td><input type="text" name="tag" > </td><td><input type="submit" value="Chercher"name="search">
-					</td>
-				</tr>
-				<tr>
-					<td><input type="radio" name="type" value="Textes" required >Textes</td>
-					<td><input type="radio" name="type" value="Musiques" required >Musiques</td>
-					<td><input type="radio" name="type" value="Videos" required >Videos</td>
-					<td><input type="radio" name="type" value="Images" required >Images</td>
-					<td><input type="radio" name="type" value="All" required >Tout</td>
-				</tr>
-			</table>
+		<section style="background:#EBF0F8;" id="search-page">
+			<form method="post" action="" class="form-inline"> 
+				<div class="form-group">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<label>Titre ou Description</label>
+					<input class="form-control" type="text" name="tag" >
+					
+				</div>	
+				<div class="form-group">
+				<label class="radio-inline">	
+					<input type="radio" name="type" value="Textes" required >Textes
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="type" value="Musiques" required >Musiques
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="type" value="Videos" required >Videos
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="type" value="Images" required >Images
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="type" value="All" required >Tout
+				</label>
+				</div>
+				<div class="form-group">
+					
+					<input style="margin-left:15px;" class="btn btn-primary" type="submit" value="Chercher"name="search">
+					
+				</div>
 			</form>
+
+			<br><br><br>
 			
+
 			<?php
 				if(!isset($_POST['search']))
 				{
@@ -90,7 +107,7 @@ include "con_sql.php";
 										while($data)
 										{  ?>                     
 											<!-- Affichage oeuvre -->
-											<div class="col-md-4 col-sm-6">
+											<div style="margin-left:15px;" class="col-md-4 col-sm-6">
 												<div class="portfolio-item">
 													<div class="item-image">
 														<a href="artiste/oeuvre.php?ID=<?php echo $data["id"] ?>">
