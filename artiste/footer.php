@@ -14,7 +14,7 @@
                             <h4>Les Liens Utiles</h4>
                             <ul class="row footer-links">
                                 <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <li><a href="recherche.php">Le Moteur de recherche</a></li>
+                                    <li><a href="../recherche.php">Le Moteur de recherche</a></li>
                                     <li><a href="mentions.php">Mentions légales</a></li>
                                     
                                 </div>

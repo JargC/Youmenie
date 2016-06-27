@@ -9,7 +9,7 @@
 <html class="no-js"> <!--<![endif]-->
     <head>
 
-        <title>annonce</title>
+        <title>Annonces</title>
         <link rel="icon" type="image/ico" href="assets/img/site_LOGO.ico">
         <!-- meta -->
         <meta charset="utf-8">
@@ -70,30 +70,14 @@
 
 <!-- Html contenant le formulaire de contacte -->
 <section class="bg-light-gray">
-  
-<section class="contact-form">     
-<form onsubmit ='return confirm("Etes vous sur de vouloir poster cette annonces?")' enctype="multipart/form-data" method="POST">
-<div class="row">
-    <div class="col-md-4">
-	</div>
-	<div class="col-md-4">
-	<div class="form-group">
-	<li><label for="type">Type : </label><input type="text" name="type" value="<?php echo $type ;?>" required/></li>
-	</div>
-	<div class="form-group">
-	<li><label for="prix">Prix : </label><input type="text" name="prix" value="<?php echo $prix ;?>" required /></li>
-	</div>
-	<div class="form-group">
-	<li><label for="photo">Photo : </label><input type="file" name="photo" required/></li>
-	</div>
-	<div class="form-group">
-	<li><label for="description">Description : </label><textarea name="description" required><?php echo $description;?></textarea></li>
-	</div>
-	</div>
-	
-	<div class="col-md-3">
-	<li><input type="submit" value="Poster son annonce " name="sub"  /> </li>
-	</div>
+  <div class="container">
+     
+<form onsubmit ='return confirm("Etes vous sur de vouloir poster cette annonce ?")' enctype="multipart/form-data" method="POST">
+	<li><label for="type">Type : </label><input class="form-control type="text" name="type" value="<?php echo $type ;?>" required/></li><br>
+	<li><label for="prix">Prix : </label><input class="form-control type="text" name="prix" value="<?php echo $prix ;?>" required /></li><br>
+	<li><label for="photo">Photo : </label><input class="form-control-file" type="file" name="photo" required/></li><br>
+	<li><label for="description">Description : </label><textarea class="form-control" name="description" required><?php echo $description;?></textarea></li><br>
+	<li><input  class="btn btn-primary" type="submit" value="Envoyer" name="sub" /></li>
 </form>
     
   </div>	
@@ -111,20 +95,21 @@
 	
 	$tab = selectAllannonce($connexion); // on va chercher la liste dans la base
 	
+	if(isset($tab)){
 	for($i = 0; $i<count($tab);$i++){ // pour chaque annonce
 		// création de la liste HTML depuis les données récupérées
 		$liste .= "<div class='annonce' style=' margin-top : 50px; '>"; 
-		$liste .= "<p>Date de publication :".$tab[$i]["date_publication"]."</p>";
-		$liste .= "<p>Type :".$tab[$i]["type"]."</p>";
-		$liste .= "<p>Prix :".$tab[$i]["prix"]."</p>";
+		$liste .= "<p><b>Date de publication :</b> ".$tab[$i]["date_publication"]."</p>";
+		$liste .= "<p><b>Type :</b> ".$tab[$i]["type"]."</p>";
+		$liste .= "<p><b>Prix :</b> ".$tab[$i]["prix"]."</p>";
 		$liste .= "<p><img src ='./img/".$tab[$i]["photo"]."' /></p>";
-		$liste .= "<p>Description :".$tab[$i]["description"]."</p>";		
+		$liste .= "<p><b>Description :</b> ".$tab[$i]["description"]."</p>";		
 		$liste .= "</div>";
+	}
 	}
 
 	echo $liste; // affichage de la liste html crée précedement 
 ?>
-
 
 
 
