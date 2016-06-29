@@ -26,7 +26,12 @@ $info = mysql_fetch_array($resultat_info);
 
 $tuturl = $_POST['tuturl'];
 $id_oeuvre = $_POST['id_oeuvre'];
+
+if(isset($_SESSION["login_artist"]))
+{	
 $url = "artiste.php?ID=1";
+} else $url = "#";
+
 $description = $_POST['message'];
 $date = date("d/m/Y, H:i");
 

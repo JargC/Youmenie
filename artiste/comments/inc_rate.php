@@ -173,10 +173,21 @@ function BBCode ($str) {
 
 
 function getComments($tutid){
-	
+
+if(isset($_SESSION["login_artist"]))
+{		
 $test='SELECT COUNT(*) AS verif_exist FROM comments WHERE name="'.$_SESSION["login_artist"].'" AND id_oeuvre="'.$_GET["ID"].'"';
 $res_test = mysql_query($test);
 $test_data = @mysql_fetch_array($res_test);
+}
+
+if(isset($_SESSION["login_public"]))
+{		
+$test='SELECT COUNT(*) AS verif_exist FROM comments WHERE name="'.$_SESSION["login_public"].'" AND id_oeuvre="'.$_GET["ID"].'"';
+$res_test = mysql_query($test);
+$test_data = @mysql_fetch_array($res_test);
+}
+
 	
 	$id_oeuvre = $_GET["ID"];
 //fetch all comments from database where the tutorial number is the one you are asking for
@@ -247,6 +258,8 @@ $test_data = @mysql_fetch_array($res_test);
 
 function submitComments($tutid2,$tuturl){
  
+if(isset($_SESSION["login_artist"]))
+{		
 
 echo'
 
@@ -282,6 +295,48 @@ echo'
             </div>
 
 </div>';
+
+}
+
+if(isset($_SESSION["login_public"]))
+{		
+
+echo'
+
+<a name="post">
+
+         <div class="post-bottom-section">
+
+		    
+            <div class="primary">
+
+            	<form action="oeuvre.php?ID='.$_GET['ID'].'" method="post" id="commentform">
+
+               	    <div>
+					    <label for="name" hidden>Name <span>*</span></label>
+						<input hidden id="name" name="name" value="'.$_SESSION["login_public"].'" type="text" tabindex="1" />
+						<input hidden id="id_oeuvre" name="id_oeuvre" value="'.$_GET['ID'].'" type="text" tabindex="1" />
+					</div>
+                    
+                    
+                    <div>
+						<label for="message">Votre avis <span>*</span></label>
+						<textarea id="message" name="message" rows="10" cols="18" tabindex="4"></textarea>
+					</div>
+                    <div class="no-border">
+					    <input class="button" type="submit" name="post" value="Envoyer" tabindex="5" title="Submit Comment" />
+					</div>
+
+					<input type="hidden" name="tuturl" value="'.$tuturl.'" />
+                    <input type="hidden" name="tutid2" value="'.$tutid2.'" />
+					
+               </form>
+
+            </div>
+
+</div>';
+
+}
 
 }
 ?>
