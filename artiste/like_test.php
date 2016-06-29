@@ -5,11 +5,22 @@ include "../con_sql.php";
 
 
 //Permet de voir si l'utilisateur a like ou non cette oeuvre
+if(isset($_SESSION["login_artist"]))
+{
 $req_like_sql='select * from likes where oeuvre_id="'.$_SESSION["ID"].'" AND user="'.$_SESSION["login_artist"].'"';
 $resultat_like_sql = mysql_query($req_like_sql);
 $like_sql = mysql_fetch_array($resultat_like_sql);
-
 $user = $_SESSION["login_artist"];
+}
+
+if(isset($_SESSION["login_public"]))
+{
+$req_like_sql='select * from likes where oeuvre_id="'.$_SESSION["ID"].'" AND user="'.$_SESSION["login_public"].'"';
+$resultat_like_sql = mysql_query($req_like_sql);
+$like_sql = mysql_fetch_array($resultat_like_sql);
+$user = $_SESSION["login_public"];
+}
+
 $id = $_SESSION["ID"];
 
 

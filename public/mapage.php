@@ -1,77 +1,12 @@
 <?php
 session_start();
 include "../con_sql.php";
+include "../verif_public.php";
 
-
-
-///COMMENTAIRES/AVIS	  
-if(isset($_REQUEST['post'])){
-$name = $_POST['name'];
-//Récupération des informations de l'artiste via l'ID de son oeuvre 
-$req_info='select * from user_artist where login="'.$name.'"';
+$req_info='select * from user_public where login="'.$_SESSION["login_public"].'"';
 $resultat_info = mysql_query($req_info);
 $info = mysql_fetch_array($resultat_info);
-////////////////////////////////////////////
 
-$tuturl = $_POST['tuturl'];
-$id_oeuvre = $_POST['id_oeuvre'];
-$url = "artiste.php?ID=1";
-$description = $_POST['message'];
-$date = date("d/m/Y, H:i");
-
-
-
-
-//Check form
-if ($description == ''){
-	
-	echo'Please fill in all fields before submitting the comment.';
-	exit();
-}
-
-
-//Submit data
-$query = "INSERT INTO comments VALUES('','$name','$description','$url','$date', '$id_oeuvre')";
-mysql_query($query);
-
-} 
-
-
-///////////////////////////////////
-
-$_SESSION["ID"] = $_GET['ID'];
-//Permet de voir si l'utilisateur a like ou non cette oeuvre
-if(isset($_SESSION["login_artist"]))
-{
-$req_like='select * from likes where oeuvre_id="'.$_GET['ID'].'" AND user="'.$_SESSION["login_artist"].'"';
-$resultat_like = mysql_query($req_like);
-$like = mysql_fetch_array($resultat_like);
-}
-
-if(isset($_SESSION["login_public"]))
-{
-$req_like='select * from likes where oeuvre_id="'.$_GET['ID'].'" AND user="'.$_SESSION["login_public"].'"';
-$resultat_like = mysql_query($req_like);
-$like = mysql_fetch_array($resultat_like);
-}
-
-
-
-//Récupération des informations de l'artiste via l'ID de son oeuvre 
-
-$req_info_artist='select * from oeuvres where id="'.$_GET['ID'].'"';
-$resultat_info_artist = mysql_query($req_info_artist);
-$info_artist = mysql_fetch_array($resultat_info_artist);
-
-if(!$info_artist[0])
-{
-	header("location:error.php");
-}
-		
-
-$req_info='select * from user_artist where login="'.$info_artist['user'].'"';
-$resultat_info = mysql_query($req_info);
-$info = mysql_fetch_array($resultat_info);
 ?>
 	
 <!DOCTYPE html>
@@ -85,9 +20,27 @@ $info = mysql_fetch_array($resultat_info);
 <html class="no-js"> <!--<![endif]-->
     <head>
 
+<script type="text/javascript">
 
-        <title><?php echo $info_artist['titre']; ?></title>
+function fetch_select(val)
+{
+   $.ajax({
+     type: 'post',
+     url: 'fetch_data.php',
+     data: {
+       get_option:val
+     },
+     success: function (response) {
+       document.getElementById("new_select").innerHTML=response; 
+     }
+   });
+}
 
+</script>
+
+        <title>Ma page</title>
+        <link rel="icon" type="image/ico" href="../assets/img/site_LOGO.ico">
+        
         <!-- meta -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -101,47 +54,10 @@ $info = mysql_fetch_array($resultat_info);
         <link rel="stylesheet" href="../assets/css/owl.carousel.css">
         <link rel="stylesheet" href="../assets/css/owl.theme.css">
         <link rel="stylesheet" href="../assets/css/style.css">
-		
+
 
         <!-- scripts -->
         <script type="text/javascript" src="../assets/js/modernizr.custom.97074.js"></script>
-		
-		<!-- Magnific Popup core CSS file -->
-<link rel="stylesheet" href="../assets/css/magnific-popup.css">
-
-<!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-<!-- Magnific Popup core JS file -->
-<script src="../assets/js/jquery.magnific-popup.js"></script>
-		
-<script>
-$(document).ready(function(){
-    $("button").click(function(){
-        $.ajax({url: "like_test.php", success: function(result){
-            $("#divlike").html(result);
-        }});
-    });
-});
-</script>
-
-<script>
-$(document).ready(function() {
-  
-    $('.image-popup-vertical-fit').magnificPopup({
-        type: 'image',
-        closeOnContentClick: true,
-        mainClass: 'mfp-img-mobile',
-        image: {
-            verticalFit: true
-        }
-          
-    });
-  
-});
-</script>
-	
-    <link rel="icon" type="image/ico" href="../assets/img/site_LOGO.ico">
 
     </head>
 
@@ -160,111 +76,23 @@ $(document).ready(function() {
 
 				<!-- begin our designation section -->
 
-               
-                 <!-- end of designation section -->
-
-                    
-					
-					<!--  begin portfolio section  -->
-							<br>
-                <section class="bg-light-gray">
+                <section class="bg-white designation">
                     <div class="container">
 
                         <div class="headline text-center">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title"><?php echo $info_artist['titre']; ?></h2>
-                                    <p class="section-sub-title">
-                                        <?php echo $info_artist['description']; ?>
-                                    </p> <!-- /.section-sub-title -->
+                                    <h2 class="section-title"><b>Ma page</b> <?php if(isset($erreur)) echo $erreur; ?></h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->
-						
-						<div class="text-center">
-                        <?php
-						//Si l'oeuvre est unn texte
-						if($info_artist['type']!="Textes")
-						{
-							?>
-						<a class="image-popup-vertical-fit" href="<?php echo $info_artist['icone']; ?>" title="<< <?php echo $info_artist['titre']; ?> >> de <b><?php echo $info["login"]; ?></b>">
-                            <img src="<?php echo $info_artist['icone']; ?>" width="80%" />
-                        </a>
-						<?php
-						}else echo $info_artist['fichier'];
-						?>
-						
-						
-						<br><br>
-						
-						
-						<?php
-						//Si l'oeuvre est une musique
-						if($info_artist['type']=="Musiques")
-						{
-							?>
-							
-							<audio controls="controls">
-
-								<source src="<?php echo $info_artist['fichier']; ?>" type="audio/mpeg">
-
-							</audio>
-							<br>
-							
-						
-
-							<?php
-						}
-						
-						//Si l'oeuvre est une vidéo
-						if($info_artist['type']=="Videos")
-						{
-							?>
-							<video controls src="<?php echo $info_artist['fichier']; ?>">Ici la description alternative</video>
-							<?php
-						}
-						?>
-						
-						<!-- Partie "Like" -->
-						<span class="like">
-						<div id='divlike'>
-						<?php @$expression = $_SESSION["login_artist"] || $_SESSION["login_public"];
-						if(isset($expression))
-{ if(!$like[0])
-						{
-	
-											echo "<button><i class='fa fa-heart-o'></i></button><br>";
-											
-}else echo "<button><i class='fa fa-heart'></i></button><br>"; }else echo "<i class='fa fa-heart-o'></i><br>";  ?>
-						
-							<?php echo $info_artist['likes'];
-								  echo " likes";?>
-								  
-								  
-						</div>
-						</span>
-
-                                                                                                                                              
-
-                            
-						
-						</div>
-                        </div> <!-- end of portfolio-item-list -->
-						
 
                         
-                      
-				<?php
-				//Ajout des commentaires
-				include('avis.php');
-				?>	
-				
-                 </section>
-				 
-				 
+                    </div>
+                </section>
+                 <!-- end of designation section -->
 
-					
-<!-- contact adresses section begin -->
+                    <!-- contact adresses section begin -->
                     <section class="contact-address bg-white">
                         <div class="row">
 
@@ -280,12 +108,11 @@ $(document).ready(function() {
                                         </div>
 
                                         <div class="col-md-9 col-xs-9 address-info-desc">
-                                            <h3>Artiste :</h3>
-                                            <p><a href="artiste.php?ID=<?php echo $info["id"];?>" >
+                                            <h3>Pseudo :</h3>
+                                            <p>
                                                 <?php 
 															echo $info["login"]; 
 													 ?>
-													 </a>
                                             </p>
                                         </div> <!-- /.address-info-desc -->
 
@@ -304,7 +131,7 @@ $(document).ready(function() {
                                         </div>
 
                                         <div class="col-md-9 col-xs-9 address-info-desc">
-                                            <h3>Informations </h3>
+                                            <h3>Informations</h3>
                                             <p>
                                                 Nom : <?php echo $info["nom"]; ?>
                                                 <br/>
@@ -339,15 +166,93 @@ $(document).ready(function() {
                             </div>
 
                         </div>
-                    </section> <!-- /.contact-address -->				 
-                        </div>
+                    </section> <!-- /.contact-address -->
+					
+					<!--  begin portfolio section  -->
+                <section class="bg-light-gray">
+                    
+
+                        <div class="headline text-center">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <h2 class="section-title"><u>Les oeuvres que vous aimez</u></h2>
+                                    <p class="section-sub-title">
+                                        
+                                    </p> <!-- /.section-sub-title -->
+                                </div>
+                            </div>
+                        </div> <!-- /.headline -->
+						
+						<?php
+						$req="SELECT * FROM oeuvres,likes WHERE likes.user LIKE '".$_SESSION["login_public"]."' AND likes.oeuvre_id = oeuvres.id  ";
+						$sql=mysql_query($req);
+						if(mysql_num_rows($sql)<1)
+						{
+							echo "<center><h2>Vous n'avez pas encore liké d'oeuvres.</h2></center>";
+						}
+						else {
+							$data = mysql_fetch_assoc($sql);
+							?>
+							
+							<div class="portfolio-item-list">
+                            <div class="row">
+							
+							<?php
+
+							while($data)
+							{
+						?>
+						
+
+                        
+							<!-- Affichage oeuvre -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="portfolio-item">
+                                        <div class="item-image">
+                                            <a href="../artiste/oeuvre.php?ID=<?php echo $data["oeuvre_id"] ?>">
+                                                <img src="../artiste/<?php echo $data["icone"]?>" class="img-responsive center-block" alt="portfolio 1">
+                                                <div><span><i class="fa fa-plus"></i></span></div>
+                                            </a>
+                                        </div>
+
+                                        <div class="item-description">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <span class="item-name">
+                                                        <?php echo $data["titre"]?>
+                                                    </span>
+                                                    <span>
+                                                        <?php echo $data["description"]?>
+                                                    </span>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <span class="like">
+                                                        <i class="fa fa-heart-o"></i>
+                                                        <?php echo $data["likes"] ?>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end of /.item-description -->
+                                    </div> <!-- end of /.portfolio-item -->
+                                </div>
+
+                                                                                                                                              
+
                             
-                    </div>
-                 
+						<?php $data=mysql_fetch_assoc($sql);}
+						?>
+						</div>
+                        </div> <!-- end of portfolio-item-list -->
+						<?php } ?>
+
+                        
+                            
+                    
+                </section> 
                 <!--   end of portfolio section  -->
 
 				<br>
-				
+				<a href="logout.php"><button type="submit" id="logout" name="logout" class="btn btn-black"><i class="fa fa-power-off" aria-hidden="true"></i> Déconnexion</button></a>
 				<br><br>
                     
 
@@ -359,16 +264,19 @@ $(document).ready(function() {
             
         </div> <!-- end of /#home-page -->
 		
+		<!--Pop up CSS - Ajouter Oeuvre -->
+
+		
+
 		
 		
 
         <!--  Necessary scripts  -->
 
-        
+        <script type="text/javascript" src="../assets/js/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../assets/js/owl.carousel.js"></script>
         <script type="text/javascript" src="../assets/js/jquery.hoverdir.js"></script>
-		
 
 
         <!-- script for portfolio section using hoverdirection -->
@@ -417,7 +325,7 @@ $(document).ready(function() {
         </script>
 		
 		
-		
-		
+  
+
     </body>
 </html>

@@ -40,7 +40,7 @@
                                     </ul>  <!-- end of /.dropdown-menu -->
                             </li> <!-- end of /.dropdown -->
                                     
-    <?php }else { ?>
+    <?php }else if(isset($_SESSION["login_artist"])){ ?>
         <li class="dropdown">
                                 <a href="artiste/mapage.php" class="dropdown-toggle" data-toggle="dropdown"><span><i class="fa fa-user" aria-hidden="true"></i> Mon compte</span></a>
                                 <ul class="dropdown-menu">  
@@ -53,6 +53,8 @@
                                     </ul>  <!-- end of /.dropdown-menu -->
                             </li> <!-- end of /.dropdown -->
     <?php } ?>
+	
+	
                   
 
                             <li>

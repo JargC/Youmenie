@@ -14,7 +14,8 @@ if(isset($_POST["submit_login_public"]))
 	if(mysql_num_rows($resultat)>0)
 	{
 		$_SESSION["login_public"] = $login_public;
-		header("location:artiste/mapage.php");
+		$_SESSION["test"] = $mdp_public;
+		header("location:public/mapage.php");
 	}else $erreur = "Erreur, mauvais login ou mot de passe";
 }
 
